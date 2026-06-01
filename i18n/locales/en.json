@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Hey, I'm Jonas. I break things in my {homelab}.",
+    "homelab_word": "homelab",
+    "subtitle": "I love networking, servers, and breaking things.",
+    "learning_now": "Currently learning: {learning_now_list}",
+    "learning_now_list": "Kubernetes"
+  }
+}

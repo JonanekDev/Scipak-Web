@@ -1,0 +1,9 @@
+{
+  "hero": {
+    "title": "Ahoj, jsem Jonáš. Rád rozbíjím věci ve svém {homelab}.",
+    "homelab_word": "homelabu",
+    "subtitle": "Miluju sítě, servery a rozbíjení věcí.",
+    "learning_now": "Momentálně se učím: {learning_now_list}",
+    "learning_now_list": "Kubernetes"
+  }
+}
