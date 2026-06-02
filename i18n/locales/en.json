@@ -1,9 +1,27 @@
 {
+  "home": {
+    "seo_title": "Jonas Scipak - Sysadmin & IT Student"
+  },
   "hero": {
     "title": "Hey, I'm Jonas. I break things in my {homelab}.",
     "homelab_word": "homelab",
-    "subtitle": "I love networking, servers, and breaking things.",
+    "subtitle": "I love networking, servers, and tinkering with infrastructure.",
     "learning_now": "Currently learning: {learning_now_list}",
     "learning_now_list": "Kubernetes"
+  },
+  "about": {
+    "title": "About Me",
+    "paragraph_1": "I'm Jonáš. IT isn't just my field of study—it's been my passion since childhood.",
+    "paragraph_2": "I've been running my own homelab for over four years. I love experimenting, trying out new things, and learning by doing. I'm currently studying {strong} and I'm eager to finally bridge the gap between academic theory and real-world practice.",
+    "paragraph_2_strong": "IT at UPOL",
+    "paragraph_3": "I'm currently looking for a job in IT, whether it involves {strong}. If you're looking for someone to join your team, don't hesitate to get in touch.",
+    "paragraph_3_strong": "networking, server administration, or user support"
+  },
+  "contact": {
+    "title": "Contact",
+    "paragraph": "Whether you need someone for networking, server administration, or IT support, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
+  },
+  "blog": {
+    "title": "Blog"
   }
 }

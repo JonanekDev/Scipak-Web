@@ -1,15 +1,31 @@
 <script setup>
-import HeroSection from '~/components/home/HeroSection.vue'
+import AboutSection from '~/components/home/AboutSection.vue';
+import HeroSection from '~/components/home/HeroSection.vue';
+import ContactSection from '~/components/home/ContactSection.vue';
+useHead({
+  titleTemplate: '%s',
+});
 useSeoMeta({
-  title: 'Home',
-  description: 'IT student & junior sysadmin building infra',
+  title: $t('home.seo_title'),
+  description: 'IT student & junior sysadmin',
   ogTitle: 'Jonas Ščipák',
-  ogDescription: 'IT student & junior sysadmin building infra',
-  ogImage: '/og-home.webp',
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-})
+  ogDescription: 'IT student & junior sysadmin',
+});
 </script>
 <template>
   <HeroSection />
+  <AboutSection />
+  <ContactSection />
 </template>
+
+<style>
+h2.section-title {
+  font-family: 'DM Mono', monospace;
+  margin-bottom: var(--space-6);
+}
+h2.section-title::before {
+  content: '// ';
+  color: var(--color-text-disabled);
+  font-family: 'DM Mono', monospace;
+}
+</style>

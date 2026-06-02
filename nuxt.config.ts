@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  ssr: true,
 
   css: ['@/assets/css/main.css'],
 
@@ -31,14 +32,40 @@ export default defineNuxtConfig({
     head: {
       titleTemplate: '%s - Jonáš Ščipák',
       meta: [
-        { name: 'description', content: "IT student & junior sysadmin" },
         { name: 'author', content: 'Jonáš Ščipák' },
+        { name: 'theme-color', content: '#1caf87' },
+        { name: 'twitter:card', content: 'summary' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'Jonáš Ščipák' },
+        { property: 'og:image', content: 'https://scipak.eu/favicon.webp' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/webp', sizes: '512x512', href: '/favicon.webp' },
       ],
-    }
+    },
   },
 
-  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/seo', '@nuxt/icon', '@nuxtjs/color-mode'],
+  //Blog
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            default: 'github-light',
+            dark: 'github-dark',
+          },
+        },
+      },
+    },
+  },
+
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/i18n',
+    '@nuxtjs/seo',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
+    '@nuxt/fonts',
+  ],
 });
