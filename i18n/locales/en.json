@@ -11,15 +11,20 @@
   },
   "about": {
     "title": "About Me",
-    "paragraph_1": "I'm Jonáš. IT isn't just my field of study—it's been my passion since childhood.",
-    "paragraph_2": "I've been running my own homelab for over four years. I love experimenting, trying out new things, and learning by doing. I'm currently studying {strong} and I'm eager to finally bridge the gap between academic theory and real-world practice.",
-    "paragraph_2_strong": "IT at UPOL",
+    "paragraph_1": "I'm Jonáš. IT isn't just my field of study, it's also been my passion since childhood.",
+    "paragraph_2": "I've been running my own homelab for over four years. I love experimenting, trying out new things, and learning by doing. I'm currently studying {strong} and I'm looking to get some hands-on experience.",
+    "paragraph_2_strong": "IT at Palacký University Olomouc",
     "paragraph_3": "I'm currently looking for a job in IT, whether it involves {strong}. If you're looking for someone to join your team, don't hesitate to get in touch.",
     "paragraph_3_strong": "networking, server administration, or user support"
   },
   "contact": {
     "title": "Contact",
     "paragraph": "Whether you need someone for networking, server administration, or IT support, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
+  },
+  "tools": {
+    "title": "Tools",
+    "mail-tester-paragraph": "Send a test email and instantly check if your SPF, DKIM, DMARC, and reverse DNS records are properly configured.",
+    "dmarc-analyzer-paragraph": "Forward your DMARC RUA reports here. Get a clear overview of who is sending email on behalf of your domain and detect spoofing attempts."
   },
   "blog": {
     "title": "Blog"

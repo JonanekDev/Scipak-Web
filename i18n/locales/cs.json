@@ -12,7 +12,7 @@
   "about": {
     "title": "O mně",
     "paragraph_1": "Jsem Jonáš, IT pro mě není jen obor který studuji, ale baví mě od dětství.",
-    "paragraph_2": "Vlastní homelab mám už přes 4 roky. Rád experimentuju, zkouším nové věci a učím se za pochodu. Aktuálně studuji {strong} a chci školní teorii konečně propojit s reálnou praxí.",
+    "paragraph_2": "Vlastní homelab mám už přes 4 roky. Rád experimentuju, zkouším nové věci a učím se za pochodu. Aktuálně studuji {strong} a rád bych už při škole získal skutečnou praxi.",
     "paragraph_2_strong": "IT na UPOLu",
     "paragraph_3": "Aktuálně hledám práci v IT ať už jde o {strong}. Pokud zrovna někoho takového hledáte, neváhejte se ozvat.",
     "paragraph_3_strong": "sítě, správu serverů nebo podporu uživatelů"
@@ -20,6 +20,11 @@
   "contact": {
     "title": "Kontakt",
     "paragraph": "Ať už hledáte někoho na sítě, správu serverů nebo podporu, nebo si jen chcete popovídat o tom proč je Hyper-V lepší než Proxmox 😉, neváhejte se ozvat."
+  },
+  "tools": {
+    "title": "Nástroje",
+    "mail-tester-paragraph": "Pošlete testovací e-mail a obratem zjistěte, zda máte správně nastavené SPF, DKIM, DMARC a reverzní DNS záznamy.",
+    "dmarc-analyzer-paragraph": "Nasměrujte sem své DMARC RUA reporty. Získejte přehled o tom, kdo odesílá poštu za vaši doménu a odhalte pokusy o spoofing."
   },
   "blog": {
     "title": "Blog"

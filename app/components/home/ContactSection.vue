@@ -21,5 +21,6 @@
 .contact-list {
   list-style: none;
   padding-left: 0;
+  margin-bottom: var(--space-4);
 }
 </style>

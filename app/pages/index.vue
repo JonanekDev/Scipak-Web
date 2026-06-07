@@ -2,6 +2,7 @@
 import AboutSection from '~/components/home/AboutSection.vue';
 import HeroSection from '~/components/home/HeroSection.vue';
 import ContactSection from '~/components/home/ContactSection.vue';
+import ToolsSection from '~/components/home/ToolsSection.vue';
 useHead({
   titleTemplate: '%s',
 });
@@ -16,6 +17,7 @@ useSeoMeta({
   <HeroSection />
   <AboutSection />
   <ContactSection />
+  <ToolsSection />
 </template>
 
 <style>

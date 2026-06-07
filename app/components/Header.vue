@@ -10,7 +10,7 @@ const toggleTheme = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
 };
 
-// --- LOGIKA PRO JAZYKOVÝ DROPDOWN ---
+// Language menu state
 const isLangMenuOpen = ref(false);
 const dropdownRef = ref(null);
 
@@ -22,7 +22,7 @@ const closeLangMenu = () => {
   isLangMenuOpen.value = false;
 };
 
-// --- LOGIKA PRO MOBILNÍ MENU ---
+// Mobile menu state
 const isMobileMenuOpen = ref(false);
 
 const toggleMobileMenu = () => {
@@ -33,7 +33,7 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
 };
 
-// Zavření dropdownu při kliknutí mimo něj
+// Close dropdown when clicking outside
 const handleClickOutside = (event) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
     isLangMenuOpen.value = false;
@@ -66,8 +66,8 @@ onUnmounted(() => {
             >
           </li>
           <li>
-            <NuxtLink :to="{ path: localePath('/'), hash: '#projects' }" @click="closeMobileMenu"
-              >~/projects</NuxtLink
+            <NuxtLink :to="{ path: localePath('/'), hash: '#tools' }" @click="closeMobileMenu"
+              >~/tools</NuxtLink
             >
           </li>
           <li>
