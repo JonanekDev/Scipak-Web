@@ -33,6 +33,25 @@ useSeoMeta({
   ogType: 'article',
   twitterCard: 'summary_large_image',
 });
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: article.value.title,
+      description: article.value.description,
+      datePublished: article.value.date,
+      author: {
+        '@type': 'Person',
+        name: 'Jonáš Šípak',
+        url: 'https://scipak.eu'
+      },
+      image: `https://scipak.eu${article.value.thumbnail}`,
+      url: `https://scipak.eu${route.path}`,
+    })
+  }]
+});
 </script>
 
 <template>
