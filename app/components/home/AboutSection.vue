@@ -18,7 +18,3 @@
     </i18n-t>
   </section>
 </template>
-
-<style scoped>
-/* Scoped styles removed as they are now global */
-</style>
