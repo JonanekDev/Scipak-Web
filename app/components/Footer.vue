@@ -17,10 +17,20 @@
         <a href="https://github.com/JonanekDev/" target="_blank" rel="noopener" aria-label="GitHub">
           <Icon name="lucide:github" class="icon" />
         </a>
-        <a href="https://www.youtube.com/@scipakos" target="_blank" rel="noopener" aria-label="YouTube">
+        <a
+          href="https://www.youtube.com/@scipakos"
+          target="_blank"
+          rel="noopener"
+          aria-label="YouTube"
+        >
           <Icon name="lucide:youtube" class="icon" />
         </a>
-        <a href="https://www.instagram.com/jonasscipak/" target="_blank" rel="noopener" aria-label="Instagram">
+        <a
+          href="https://www.instagram.com/jonasscipak/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram"
+        >
           <Icon name="lucide:instagram" class="icon" />
         </a>
       </div>

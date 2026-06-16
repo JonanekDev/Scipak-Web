@@ -12,8 +12,8 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Roboto', preload: true },
-      { name: 'DB Mono', preload: true},
-  ],
+      { name: 'DB Mono', preload: true },
+    ],
   },
 
   routeRules: {

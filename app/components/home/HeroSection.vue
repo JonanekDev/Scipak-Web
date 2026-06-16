@@ -145,13 +145,13 @@
 
 @media (min-width: 959px) {
   .hero-image-desktop-only {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius-lg);
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-      position: relative;
-      z-index: 1;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    position: relative;
+    z-index: 1;
   }
 }
 </style>

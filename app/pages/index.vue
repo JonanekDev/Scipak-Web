@@ -4,21 +4,20 @@ import HeroSection from '~/components/home/HeroSection.vue';
 import ContactSection from '~/components/home/ContactSection.vue';
 useHead({
   titleTemplate: '%s',
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Jonáš Šípak',
-      url: 'https://scipak.eu',
-      jobTitle: 'Junior Sysadmin',
-      knowsAbout: ['Proxmox', 'Linux', 'Docker', 'Networking'],
-      sameAs: [
-        'https://github.com/...',
-        'https://linkedin.com/in/...',
-      ]
-    })
-  }]
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Jonáš Šípak',
+        url: 'https://scipak.eu',
+        jobTitle: 'Junior Sysadmin',
+        knowsAbout: ['Proxmox', 'Linux', 'Docker', 'Networking'],
+        sameAs: ['https://github.com/...', 'https://linkedin.com/in/...'],
+      }),
+    },
+  ],
 });
 useSeoMeta({
   title: $t('home.seo_title'),

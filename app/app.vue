@@ -1,5 +1,5 @@
 <script setup>
-console.log('Hi, I\'m Jonáš :) I realy love Windows server :)');
+console.log("Hi, I'm Jonáš :) I realy love Windows server :)");
 </script>
 <template>
   <Header />

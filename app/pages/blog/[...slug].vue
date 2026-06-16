@@ -4,9 +4,7 @@ const { locale } = useI18n();
 
 const collectionName = locale.value === 'cs' ? 'blog_cs' : 'blog_en';
 
-const searchPath = locale.value === 'cs'
-  ? route.path.replace(/^\/cs/, '')
-  : route.path;
+const searchPath = locale.value === 'cs' ? route.path.replace(/^\/cs/, '') : route.path;
 
 const { data: article } = await useAsyncData(`blog-${collectionName}-${searchPath}`, () => {
   return queryCollection(collectionName).where('path', '=', searchPath).first();
@@ -32,28 +30,31 @@ useSeoMeta({
   ogUrl: fullUrl,
   ogLocale: locale.value === 'cs' ? 'cs_CZ' : 'en_US',
   twitterCard: 'summary_large_image',
-articlePublishedTime: new Date(article.value.date).toISOString(),});
+  articlePublishedTime: new Date(article.value.date).toISOString(),
+});
 
 useHead({
   link: [{ rel: 'canonical', href: fullUrl.value }],
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: article.value.title,
-      description: article.value.description,
-      datePublished: new Date(article.value.date).toISOString(),
-      author: {
-        '@type': 'Person',
-        name: 'Jonáš Šípak',
-        url: withSiteUrl('/').value,
-      },
-      image: ogImageUrl.value,
-      mainEntityOfPage: fullUrl.value,
-      url: fullUrl.value,
-    }),
-  }],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.value.title,
+        description: article.value.description,
+        datePublished: new Date(article.value.date).toISOString(),
+        author: {
+          '@type': 'Person',
+          name: 'Jonáš Šípak',
+          url: withSiteUrl('/').value,
+        },
+        image: ogImageUrl.value,
+        mainEntityOfPage: fullUrl.value,
+        url: fullUrl.value,
+      }),
+    },
+  ],
 });
 </script>
 
@@ -61,20 +62,21 @@ useHead({
   <article>
     <h1 class="title">{{ article.title }}</h1>
     <time class="post-date" :datetime="article.date">
-      {{ new Date(article.date).toLocaleDateString(locale, { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      }) }}
+      {{
+        new Date(article.date).toLocaleDateString(locale, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      }}
     </time>
     <div class="post">
-    <ContentRenderer :value="article" />
+      <ContentRenderer :value="article" />
     </div>
   </article>
 </template>
 
 <style>
-
 .post-date {
   font-family: 'DM Mono', monospace;
   font-size: 13px;
