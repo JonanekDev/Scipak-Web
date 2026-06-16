@@ -4,12 +4,28 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
 
+  site: {
+    url: process.env.NUXT_SITE_URL || 'https://scipak.eu',
+    name: 'Jonáš Ščipák',
+  },
+
+  fonts: {
+    families: [
+      { name: 'Roboto', preload: true },
+      { name: 'DB Mono', preload: true},
+  ],
+  },
+
+  routeRules: {
+    'imgs/**': { headers: { 'Cache-Control': 'public, max-age=31536000, immutable' } },
+  },
+
   css: ['@/assets/css/main.css'],
 
   i18n: {
     locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'cs', name: 'Čeština', file: 'cs.json' },
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'cs', language: 'cs-CZ', name: 'Čeština', file: 'cs.json' },
     ],
     defaultLocale: 'en',
     strategy: 'prefix_except_default',

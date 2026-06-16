@@ -40,7 +40,7 @@
       </div>
 
       <div class="hero-image-wrapper">
-        <img src="/imgs/home/me.webp" class="hero-image" />
+        <div class="hero-image-desktop-only"></div>
       </div>
     </div>
   </section>
@@ -93,14 +93,8 @@
   border-radius: 50%;
 }
 
-.hero-image {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-lg);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-  position: relative;
-  z-index: 1;
+.hero-image-desktop-only {
+  display: none;
 }
 
 .hero-title {
@@ -149,9 +143,15 @@
   margin-top: var(--space-6);
 }
 
-@media (max-width: 959px) {
-  .hero-image-wrapper {
-    display: none;
+@media (min-width: 959px) {
+  .hero-image-desktop-only {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+      position: relative;
+      z-index: 1;
   }
 }
 </style>

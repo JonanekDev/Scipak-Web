@@ -2,62 +2,23 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-const { locale } = useI18n();
 const route = useRoute();
+const { locale } = useI18n();
 
-const { data: allArticles } = await useAsyncData('blog-list', () => {
-  return queryCollection('blog').all();
-});
+const { data: articles } = await useAsyncData(
+  'blog-list',
+  () => queryCollection(locale.value === 'cs' ? 'blog_cs' : 'blog_en').all(),
+  { watch: [locale] },
+);
 
 const filteredArticles = computed(() => {
-  if (!allArticles.value) return [];
+  if (!articles.value) return [];
 
-  const groups = {};
+  let result = articles.value.map((article) => ({
+    ...article,
+    path: locale.value === 'cs' ? `/cs${article.path}` : article.path,
+  }));
 
-  // Extracting locale and slug directly from the file path
-  allArticles.value.forEach((article) => {
-    const pathParts = article.path.split('/');
-    const articleLocale = pathParts[1];
-    const slug = pathParts[pathParts.length - 1];
-
-    if (!groups[slug]) {
-      groups[slug] = {};
-    }
-
-    groups[slug][articleLocale] = article;
-  });
-
-  const currentLang = locale.value;
-  let result = [];
-
-  // Fallback
-  Object.values(groups).forEach((group) => {
-    let selectedArticle = null;
-    let isFallback = false;
-
-    if (group[currentLang]) {
-      selectedArticle = group[currentLang];
-    } else if (group['en']) {
-      selectedArticle = group['en'];
-      isFallback = currentLang !== 'en';
-    }
-
-    if (selectedArticle) {
-      // For default locale (en), remove the en/ prefix from path
-      let articlePath = selectedArticle.path;
-      if (currentLang === 'en' && articlePath.startsWith('/en/')) {
-        articlePath = articlePath.replace('/en/', '/');
-      }
-
-      result.push({
-        ...selectedArticle,
-        path: articlePath,
-        isFallback,
-      });
-    }
-  });
-
-  // Tag filtering
   const selectedTag = route.query.tag;
   if (selectedTag) {
     result = result.filter((article) => article.tags?.includes(selectedTag));

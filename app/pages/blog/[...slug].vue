@@ -2,19 +2,14 @@
 const route = useRoute();
 const { locale } = useI18n();
 
-// Normalize route path
-const normalizedPath = route.path.startsWith('/') ? route.path.slice(1) : route.path;
+const collectionName = locale.value === 'cs' ? 'blog_cs' : 'blog_en';
 
-// If it's default locale (en) without prefix, add en/ to search path
-let searchPath = `/${normalizedPath}`;
-if (locale.value === 'en' && !normalizedPath.startsWith('en/')) {
-  searchPath = `/en/${normalizedPath}`;
-}
+const searchPath = locale.value === 'cs'
+  ? route.path.replace(/^\/cs/, '')
+  : route.path;
 
-console.log('Search path:', searchPath);
-
-const { data: article } = await useAsyncData(`blog-${route.path}`, () => {
-  return queryCollection('blog').where('path', '=', searchPath).first();
+const { data: article } = await useAsyncData(`blog-${collectionName}-${searchPath}`, () => {
+  return queryCollection(collectionName).where('path', '=', searchPath).first();
 });
 
 if (!article.value) {
@@ -24,16 +19,23 @@ if (!article.value) {
   });
 }
 
+const fullUrl = withSiteUrl(route.path);
+const ogImageUrl = withSiteUrl(article.value.thumbnail);
+
 useSeoMeta({
   title: article.value.title,
   description: article.value.description,
   ogTitle: article.value.title,
   ogDescription: article.value.description,
-  ogImage: article.value.thumbnail,
+  ogImage: ogImageUrl,
   ogType: 'article',
+  ogUrl: fullUrl,
+  ogLocale: locale.value === 'cs' ? 'cs_CZ' : 'en_US',
   twitterCard: 'summary_large_image',
-});
+articlePublishedTime: new Date(article.value.date).toISOString(),});
+
 useHead({
+  link: [{ rel: 'canonical', href: fullUrl.value }],
   script: [{
     type: 'application/ld+json',
     innerHTML: JSON.stringify({
@@ -41,16 +43,17 @@ useHead({
       '@type': 'BlogPosting',
       headline: article.value.title,
       description: article.value.description,
-      datePublished: article.value.date,
+      datePublished: new Date(article.value.date).toISOString(),
       author: {
         '@type': 'Person',
         name: 'Jonáš Šípak',
-        url: 'https://scipak.eu'
+        url: withSiteUrl('/').value,
       },
-      image: `https://scipak.eu${article.value.thumbnail}`,
-      url: `https://scipak.eu${route.path}`,
-    })
-  }]
+      image: ogImageUrl.value,
+      mainEntityOfPage: fullUrl.value,
+      url: fullUrl.value,
+    }),
+  }],
 });
 </script>
 

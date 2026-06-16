@@ -3,23 +3,24 @@
     <div class="container hero-container">
       <p>&copy; {{ new Date().getFullYear() }} Jonáš Ščipák. Built with Nuxt and ❤️.</p>
       <div class="socials">
-        <a href="mailto:jonas@scipak.eu">
+        <a href="mailto:jonas@scipak.eu" aria-label="Email">
           <Icon name="lucide:mail" class="icon" />
         </a>
         <a
           href="https://www.linkedin.com/in/jon%C3%A1%C5%A1-%C5%A1%C4%8Dip%C3%A1k-b5058522b/"
           target="_blank"
           rel="noopener"
+          aria-label="LinkedIn"
         >
           <Icon name="lucide:linkedin" class="icon" />
         </a>
-        <a href="https://github.com/JonanekDev/" target="_blank" rel="noopener">
+        <a href="https://github.com/JonanekDev/" target="_blank" rel="noopener" aria-label="GitHub">
           <Icon name="lucide:github" class="icon" />
         </a>
-        <a href="https://www.youtube.com/@scipakos" target="_blank" rel="noopener">
+        <a href="https://www.youtube.com/@scipakos" target="_blank" rel="noopener" aria-label="YouTube">
           <Icon name="lucide:youtube" class="icon" />
         </a>
-        <a href="https://www.instagram.com/jonasscipak/" target="_blank" rel="noopener">
+        <a href="https://www.instagram.com/jonasscipak/" target="_blank" rel="noopener" aria-label="Instagram">
           <Icon name="lucide:instagram" class="icon" />
         </a>
       </div>
