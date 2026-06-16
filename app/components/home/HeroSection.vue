@@ -40,7 +40,7 @@
       </div>
 
       <div class="hero-image-wrapper">
-        <div class="hero-image-desktop-only"></div>
+        <img src="/imgs/home/me.webp" class="hero-image" alt="Jonáš Ščipák - photo" fetchpriority="high" />
       </div>
     </div>
   </section>
@@ -93,8 +93,15 @@
   border-radius: 50%;
 }
 
-.hero-image-desktop-only {
-  display: none;
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 1 / 1;
 }
 
 .hero-title {
@@ -143,15 +150,9 @@
   margin-top: var(--space-6);
 }
 
-@media (min-width: 959px) {
-  .hero-image-desktop-only {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-    position: relative;
-    z-index: 1;
+@media (max-width: 959px) {
+  .hero-image-wrapper {
+    display: none;
   }
 }
 </style>

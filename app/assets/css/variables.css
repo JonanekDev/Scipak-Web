@@ -36,10 +36,10 @@
 html[data-theme='light'] {
   --color-bg: #ffffff;
   --color-bg-elevated: #f4f4f5;
-  --color-bg-subtle: #e4e4e7;
+  --color-bg-subtle: #f5f5f5;
 
-  --color-primary: #128766;
-  --color-primary-hover: #0e6b50;
+  --color-primary: #1caf87;
+  --color-primary-hover: #168f6e;
   --color-primary-subtle: #1caf8715;
   --color-secondary: #07518d;
   --color-accent: #7a9010;
