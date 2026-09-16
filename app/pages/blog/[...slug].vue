@@ -46,7 +46,7 @@ useHead({
         datePublished: new Date(article.value.date).toISOString(),
         author: {
           '@type': 'Person',
-          name: 'Jonáš Šípak',
+          name: 'Jonáš Ščipák',
           url: withSiteUrl('/').value,
         },
         image: ogImageUrl.value,

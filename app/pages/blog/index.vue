@@ -41,7 +41,7 @@ const filteredArticles = computed(() => {
         <img
           v-if="article.thumbnail"
           :src="article.thumbnail"
-          :alt="`Thumbnail pro ${article.title}`"
+          :alt="$t('blog.thumbnail_alt', { title: article.title })"
           class="article-thumbnail"
         />
         <div class="article-content">

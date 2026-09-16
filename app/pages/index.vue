@@ -10,20 +10,30 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Person',
-        name: 'Jonáš Šípak',
+        name: 'Jonáš Ščipák',
         url: 'https://scipak.eu',
         jobTitle: 'Junior Sysadmin',
         knowsAbout: ['Proxmox', 'Linux', 'Docker', 'Networking'],
-        sameAs: ['https://github.com/...', 'https://linkedin.com/in/...'],
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'Palacký University Olomouc',
+          url: 'https://www.upol.cz/',
+        },
+        sameAs: [
+          'https://github.com/JonanekDev/',
+          'https://www.linkedin.com/in/jon%C3%A1%C5%A1-%C5%A1%C4%8Dip%C3%A1k-b5058522b/',
+          'https://www.youtube.com/@scipakos',
+          'https://www.instagram.com/jonasscipak/',
+        ],
       }),
     },
   ],
 });
 useSeoMeta({
   title: $t('home.seo_title'),
-  description: 'IT student & junior sysadmin',
-  ogTitle: 'Jonas Ščipák',
-  ogDescription: 'IT student & junior sysadmin',
+  description: $t('home.seo_description'),
+  ogTitle: $t('home.seo_title'),
+  ogDescription: $t('home.seo_description'),
 });
 </script>
 <template>

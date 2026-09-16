@@ -2,7 +2,7 @@
   <section id="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <div class="mono-comment">// sysadmin & IT student @ UP Olomouc</div>
+        <div class="mono-comment">{{ $t('hero.mono_comment') }}</div>
 
         <i18n-t keypath="hero.title" tag="h1" class="hero-title">
           <template #homelab>
@@ -35,12 +35,17 @@
         </ul>
 
         <div class="cta-group">
-          <NuxtLink to="/blog" class="btn-primary"> Explore my lab </NuxtLink>
+          <NuxtLink to="/blog" class="btn-primary"> {{ $t('hero.cta') }} </NuxtLink>
         </div>
       </div>
 
       <div class="hero-image-wrapper">
-        <img src="/imgs/home/me.webp" class="hero-image" alt="Jonáš Ščipák - photo" fetchpriority="high" />
+        <img
+          src="/imgs/home/me.webp"
+          class="hero-image"
+          alt="Jonáš Ščipák - photo"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </section>

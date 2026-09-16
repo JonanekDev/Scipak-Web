@@ -1,13 +1,16 @@
 {
   "home": {
-    "seo_title": "Jonas Scipak - Sysadmin & IT Student"
+    "seo_title": "Jonas Scipak - Sysadmin & IT Student",
+    "seo_description": "IT student and junior sysadmin from Olomouc, Czech Republic, focused on networking, Linux, Proxmox and Docker infrastructure in his own homelab."
   },
   "hero": {
+    "mono_comment": "// sysadmin & IT student at UP Olomouc",
     "title": "Hey, I'm Jonas. I break things in my {homelab}.",
     "homelab_word": "homelab",
     "subtitle": "I love networking, servers, and tinkering with infrastructure.",
     "learning_now": "Currently learning: {learning_now_list}",
-    "learning_now_list": "Kubernetes"
+    "learning_now_list": "Kubernetes",
+    "cta": "Explore my lab"
   },
   "about": {
     "title": "About Me",
@@ -21,12 +24,8 @@
     "title": "Contact",
     "paragraph": "Whether you need someone for networking, server administration, or IT support, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
   },
-  "tools": {
-    "title": "Tools",
-    "mail-tester-paragraph": "Send a test email and instantly check if your SPF, DKIM, DMARC, and reverse DNS records are properly configured.",
-    "dmarc-analyzer-paragraph": "Forward your DMARC RUA reports here. Get a clear overview of who is sending email on behalf of your domain and detect spoofing attempts."
-  },
   "blog": {
-    "title": "Blog"
+    "title": "Blog",
+    "thumbnail_alt": "Thumbnail for {title}"
   }
 }

@@ -1,13 +1,16 @@
 {
   "home": {
-    "seo_title": "Jonáš Ščipák - IT student & Junior Sysadmin"
+    "seo_title": "Jonáš Ščipák - IT student & Junior Sysadmin",
+    "seo_description": "IT student a junior sysadmin z Olomouce se zaměřením na sítě, Linux, Proxmox a Docker infrastrukturu ve vlastním homelabu."
   },
   "hero": {
-    "title": "Ahoj, jsem Jonáš. Rád rozbíjím věci ve svém {homelab}.",
-    "homelab_word": "homelabu",
+    "mono_comment": "// sysadmin & IT student na UP Olomouc",
+    "title": "Ahoj, jsem Jonáš. Stavím a bořím svůj {homelab}, abych pochopil, jak věci fungují pod kapotou.",
+    "homelab_word": "homelab",
     "subtitle": "Miluju sítě, servery a zkoumání toho jak věci fungují.",
     "learning_now": "Momentálně se učím: {learning_now_list}",
-    "learning_now_list": "Kubernetes"
+    "learning_now_list": "Kubernetes",
+    "cta": "Prozkoumej můj lab"
   },
   "about": {
     "title": "O mně",
@@ -21,12 +24,8 @@
     "title": "Kontakt",
     "paragraph": "Ať už hledáte někoho na sítě, správu serverů nebo podporu, nebo si jen chcete popovídat o tom proč je Hyper-V lepší než Proxmox 😉, neváhejte se ozvat."
   },
-  "tools": {
-    "title": "Nástroje",
-    "mail-tester-paragraph": "Pošlete testovací e-mail a obratem zjistěte, zda máte správně nastavené SPF, DKIM, DMARC a reverzní DNS záznamy.",
-    "dmarc-analyzer-paragraph": "Nasměrujte sem své DMARC RUA reporty. Získejte přehled o tom, kdo odesílá poštu za vaši doménu a odhalte pokusy o spoofing."
-  },
   "blog": {
-    "title": "Blog"
+    "title": "Blog",
+    "thumbnail_alt": "Náhledový obrázek pro {title}"
   }
 }

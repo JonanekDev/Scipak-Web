@@ -22,7 +22,16 @@ export default defineNuxtConfig({
 
   css: ['@/assets/css/main.css'],
 
+  features: {
+    inlineStyles: true,
+  },
+
+  nitro: {
+    compressPublicAssets: { gzip: true, brotli: true },
+  },
+
   i18n: {
+    baseUrl: process.env.NUXT_SITE_URL || 'https://scipak.eu',
     locales: [
       { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
       { code: 'cs', language: 'cs-CZ', name: 'Čeština', file: 'cs.json' },
@@ -50,10 +59,12 @@ export default defineNuxtConfig({
       meta: [
         { name: 'author', content: 'Jonáš Ščipák' },
         { name: 'theme-color', content: '#1caf87' },
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Jonáš Ščipák' },
-        { property: 'og:image', content: 'https://scipak.eu/favicon.webp' },
+        { property: 'og:image', content: 'https://scipak.eu/imgs/og-cover.webp' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

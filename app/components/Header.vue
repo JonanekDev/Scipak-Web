@@ -66,11 +66,6 @@ onUnmounted(() => {
             >
           </li>
           <li>
-            <NuxtLink :to="{ path: localePath('/'), hash: '#tools' }" @click="closeMobileMenu"
-              >~/tools</NuxtLink
-            >
-          </li>
-          <li>
             <NuxtLink :to="{ path: localePath('/'), hash: '#contact' }" @click="closeMobileMenu"
               >~/contact</NuxtLink
             >

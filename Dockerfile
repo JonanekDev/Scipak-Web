@@ -1,4 +1,4 @@
-FROM node:25-slim AS build
+FROM node:26-slim AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:25-slim
+FROM node:26-slim
 WORKDIR /app
 
 COPY --from=build /app/.output/ ./
