@@ -41,7 +41,7 @@
 
       <div class="hero-image-wrapper">
         <img
-          src="/imgs/home/me.webp"
+          src="/imgs/home/jonas.webp"
           class="hero-image"
           alt="Jonáš Ščipák - photo"
           fetchpriority="high"
