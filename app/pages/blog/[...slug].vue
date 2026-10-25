@@ -19,22 +19,24 @@ if (!article.value) {
 
 const fullUrl = withSiteUrl(route.path);
 const ogImageUrl = withSiteUrl(article.value.thumbnail);
+const published = new Date(article.value.date).toISOString();
 
 useSeoMeta({
+  ogSiteName: 'scipak.eu',
   title: article.value.title,
   description: article.value.description,
   ogTitle: article.value.title,
   ogDescription: article.value.description,
   ogImage: ogImageUrl,
+  ogImageAlt: article.value.title,
   ogType: 'article',
-  ogUrl: fullUrl,
-  ogLocale: locale.value === 'cs' ? 'cs_CZ' : 'en_US',
+  twitterImage: ogImageUrl,
   twitterCard: 'summary_large_image',
   articlePublishedTime: new Date(article.value.date).toISOString(),
+  articleTag: article.value.tags,
 });
 
 useHead({
-  link: [{ rel: 'canonical', href: fullUrl.value }],
   script: [
     {
       type: 'application/ld+json',
@@ -44,6 +46,8 @@ useHead({
         headline: article.value.title,
         description: article.value.description,
         datePublished: new Date(article.value.date).toISOString(),
+        dateModified: published,
+        inLanguage: locale.value,
         author: {
           '@type': 'Person',
           name: 'Jonáš Ščipák',
@@ -52,6 +56,7 @@ useHead({
         image: ogImageUrl.value,
         mainEntityOfPage: fullUrl.value,
         url: fullUrl.value,
+        keywords: article.value.tags?.join(', '),
       }),
     },
   ],

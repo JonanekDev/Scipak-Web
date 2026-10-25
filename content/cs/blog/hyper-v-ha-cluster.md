@@ -8,7 +8,7 @@ thumbnail: '/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg'
 
 ## Hyper-V HA Cluster na virtualizovaném hardwaru
 
-V předchozím článku jsem postavil [Proxmox HA Cluster ze starých noťasů](/cs/blog/proxmox-ha-junk-cluster) ze starého železa, co dům dal. Jenže Proxmox je řešení postavené na Linuxu a Microsoft má samozřejmě to svoje. A třeba je i lepší? Proto jsem se rozhodl postavit Hyper-V HA Cluster.
+V předchozím článku jsem postavil [Proxmox HA Cluster ze starých noťasů](/cs/blog/junk-proxmox-ha-cluster) ze starého železa, co dům dal. Jenže Proxmox je řešení postavené na Linuxu a Microsoft má samozřejmě to svoje. A třeba je i lepší? Proto jsem se rozhodl postavit Hyper-V HA Cluster.
 
 Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cluster jsem proto **postavil virtualizovaně na jednom Proxmox serveru** pomocí tzv. nested virtualizace (virtualizace uvnitř virtualizace). Ukážeme si, jak jsem takový plně virtualizovaný cluster rozjel.
 
@@ -25,7 +25,7 @@ Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cl
 
 - **Proč Active Directory?** Cluster se standardně opírá o doménu: řeší přes ni oprávnění mezi nody a vytváří si v ní vlastní objekty. Workgroup cluster sice existuje, ale u Hyper-V v něm nefunguje live migrace.
 
-- **Proč Witness (a proč stačí 2 nody místo 3)?** Stejně jako u [Proxmoxu](/cs/blog/proxmox-ha-junk-cluster) potřebuje i Windows cluster **quorum**, tedy nadpoloviční většinu hlasů. Díky tomu při výpadku sítě nedojde ke **split-brain** scénáři (oba nody by si mysleli, že ten druhý umřel, a začaly by nezávisle zapisovat na stejný disk). U Proxmoxu jsem to řešil třetím plnohodnotným nodem, ve Windows ale další Hyper-V server živit nemusím. Třetí hlas tu dává **Disk Witness**, malý sdílený disk na iSCSI úložišti.
+- **Proč Witness (a proč stačí 2 nody místo 3)?** Stejně jako u [Proxmoxu](/cs/blog/junk-proxmox-ha-cluster) potřebuje i Windows cluster **quorum**, tedy nadpoloviční většinu hlasů. Díky tomu při výpadku sítě nedojde ke **split-brain** scénáři (oba nody by si mysleli, že ten druhý umřel, a začaly by nezávisle zapisovat na stejný disk). U Proxmoxu jsem to řešil třetím plnohodnotným nodem, ve Windows ale další Hyper-V server živit nemusím. Třetí hlas tu dává **Disk Witness**, malý sdílený disk na iSCSI úložišti.
 
 - **Kde je Single Point of Failure?** Kromě samotného Proxmox serveru je kritickým bodem virtuálka s AD a iSCSI. Když spadne, cluster přijde o doménu, witness a hlavně o iSCSI disky s virtuálkami, takže přestane fungovat úplně všechno.
 
@@ -85,7 +85,7 @@ Aby mohly virtuálky cestovat mezi nody za běhu, musí ležet na sdíleném úl
 
 Ve Failover Cluster Manageru jsem nejdřív spustil **Validate Configuration**, který zkontroluje síť, disky i nastavení obou serverů. U některých testů (třeba Validate Software Update Levels) mi to vyhodilo chyby. V labu jsem je ignoroval a pokračoval, v produkci by ale validace měla projít bez chyb. Potom stačilo kliknout na **Create Cluster**, vybrat oba nody a přiřadit clusteru vlastní IP adresu.
 
-![Výsledek Validate COnfiguration](/imgs/blog/hyper-v-ha-cluster/validate-errors.png)
+![Výsledek Validate Configuration](/imgs/blog/hyper-v-ha-cluster/validate-errors.png)
 
 ### 8. Cluster Shared Volume a Witness
 
