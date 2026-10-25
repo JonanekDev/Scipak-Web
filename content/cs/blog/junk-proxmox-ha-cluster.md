@@ -1,6 +1,6 @@
 ---
 title: 'Proxmox HA Cluster ze starých noťasů'
-description: 'Jak funguje Proxmox HA cluster postavený ze starého hardwaru, co jsem našel doma a jak dlouho trvá failover?'
+description: 'Postavil jsem Proxmox HA cluster ze tří starých počítačů. Quorum, sdílené NFS úložiště, failover a live migrace s reálnými časy výpadku.'
 tags: ['Proxmox']
 date: 2026-06-11
 thumbnail: '/imgs/blog/proxmox-junk-cluster/hardware.png'

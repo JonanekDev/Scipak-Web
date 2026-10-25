@@ -28,5 +28,11 @@
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.111",
     "prettier": "^3.8.3"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.11.1": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "esbuild@0.27.7": true
   }
 }
