@@ -100,7 +100,9 @@ Witness se nastaví kliknutím pravým na celý cluster → More Actions → Con
 
 Testovací virtuálky se nevytvářejí v obyčejném Hyper-V Manageru, ale přímo ve Failover Cluster Manageru (Roles → Virtual Machines → New Virtual Machine) s umístěním na již zmíněný `C:\ClusterStorage\Volume1`. ISO soubor můžeme klidně vybrat z lokálního disku serveru, jen ho po instalaci musíme odebrat, jinak nebude fungovat failover ani live migrace.
 
-Pro test jsem vytvořil dvě virtuálky: Windows s Remote Desktop aplikacemi (RemoteApp) a Windows s Minecraft serverem. [doplň: stačí jedna věta, co na nich přesně běží]
+Pro test jsem vytvořil dvě virtuálky: Windows s Remote Desktop aplikacemi (RemoteApp) a Windows s Minecraft serverem (Pomocí Crafty). Samozřejmě si tam můžete spustit i Linuxové virtuálky, ale když už máme ten Hyper-V cluster, tak zůstaneme u Windows.
+
+![RDApp](/imgs/blog/hyper-v-ha-cluster/rdapp.png)
 
 ## Testy
 
