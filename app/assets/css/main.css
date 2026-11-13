@@ -102,6 +102,29 @@ main.container {
   transform: translateY(-2px);
 }
 
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  font-weight: bold;
+  font-family: 'DM Mono', monospace;
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
 /* Utilities */
 .mono-comment {
   font-family: 'DM Mono', monospace;
@@ -110,6 +133,7 @@ main.container {
 
 /* Title styles from your original main.css */
 h1.title {
+  font-family: 'DM Mono', monospace;
   margin: var(--space-8) 0;
   color: var(--color-primary);
 }

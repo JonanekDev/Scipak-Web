@@ -1,31 +1,42 @@
 {
   "home": {
-    "seo_title": "Jonáš Ščipák - IT Student & Junior Sysadmin",
-    "seo_description": "IT student and junior sysadmin from Olomouc, Czech Republic, focused on networking, Linux, Proxmox and Docker infrastructure in his own homelab."
+    "seo_title": "Jonáš Ščipák - Junior Network Engineer & IT Student",
+    "seo_description": "Junior network engineer and IT student from Olomouc. I design networks and cloud platforms and run Proxmox HA, Docker Swarm and Linux in my homelab."
   },
   "hero": {
-    "mono_comment": "// sysadmin & IT student at UP Olomouc",
+    "mono_comment": "// network engineer {'@'} Batlify · IT student {'@'} UP Olomouc",
     "title": "Hey, I'm Jonas. I break things in my {homelab}.",
     "homelab_word": "homelab",
     "subtitle": "I love networking, servers, and tinkering with infrastructure.",
     "learning_now": "Currently learning: {learning_now_list}",
     "learning_now_list": "Kubernetes",
-    "cta": "Explore my lab"
+    "cta": "Explore my lab",
+    "cta_contact": "Get in touch",
+    "photo_alt": "Photo of Jonáš Ščipák"
   },
   "about": {
     "title": "About Me",
     "paragraph_1": "I'm Jonáš. IT isn't just my field of study, it's also been my passion since childhood.",
-    "paragraph_2": "I've been running my own homelab for over four years. I love experimenting, trying out new things, and learning by doing. I'm currently studying {strong} and I'm looking to get some hands-on experience.",
+    "paragraph_2": "I've been running my own homelab for over four years. I love experimenting, trying out new things, and learning by doing. I'm currently studying {strong}.",
     "paragraph_2_strong": "IT at Palacký University Olomouc",
-    "paragraph_3": "I'm currently looking for a job in IT, whether it involves {strong}. If you're looking for someone to join your team, don't hesitate to get in touch.",
-    "paragraph_3_strong": "networking, server administration, or user support"
+    "paragraph_3": "I'm also open to new projects and opportunities in IT, whether it involves {strong}. If you need a hand or you're looking for a networking person for your project, don't hesitate to get in touch.",
+    "paragraph_3_strong": "networking or server administration",
+    "paragraph_work": "Since January 2026 I've been working with {company} as a junior network engineer, handling network administration and designing their cloud platform alongside my studies."
   },
   "contact": {
     "title": "Contact",
-    "paragraph": "Whether you need someone for networking, server administration, or IT support, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
+    "paragraph": "Whether you need someone for networking or server administration, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
   },
   "blog": {
     "title": "Blog",
-    "thumbnail_alt": "Thumbnail for {title}"
+    "thumbnail_alt": "Thumbnail for {title}",
+    "latest": "Latest posts",
+    "all_posts": "All posts"
+  },
+  "nav": {
+    "lang": "Change language",
+    "theme": "Toggle theme",
+    "menu": "Menu",
+    "main": "Main navigation"
   }
 }

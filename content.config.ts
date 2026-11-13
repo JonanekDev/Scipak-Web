@@ -8,6 +8,7 @@ const blogSchema = z.object({
   thumbnail: z.string().optional(),
   tags: z.array(z.string()).default([]),
   date: z.coerce.date(),
+  updated: z.coerce.date().optional(),
 });
 
 export default defineContentConfig({

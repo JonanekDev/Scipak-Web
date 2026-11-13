@@ -20,6 +20,9 @@ if (!article.value) {
 const fullUrl = withSiteUrl(route.path);
 const ogImageUrl = withSiteUrl(article.value.thumbnail);
 const published = new Date(article.value.date).toISOString();
+const modified = article.value.updated ? new Date(article.value.updated).toISOString() : published;
+const { t } = useI18n();
+const blogUrl = withSiteUrl(locale.value === 'cs' ? '/cs/blog' : '/blog');
 
 useSeoMeta({
   ogSiteName: 'scipak.eu',
@@ -30,9 +33,9 @@ useSeoMeta({
   ogImage: ogImageUrl,
   ogImageAlt: article.value.title,
   ogType: 'article',
-  twitterImage: ogImageUrl,
   twitterCard: 'summary_large_image',
-  articlePublishedTime: new Date(article.value.date).toISOString(),
+  articlePublishedTime: published,
+  articleModifiedTime: modified,
   articleTag: article.value.tags,
 });
 
@@ -46,17 +49,29 @@ useHead({
         headline: article.value.title,
         description: article.value.description,
         datePublished: new Date(article.value.date).toISOString(),
-        dateModified: published,
+        dateModified: modified,
         inLanguage: locale.value,
         author: {
           '@type': 'Person',
           name: 'Jonáš Ščipák',
           url: withSiteUrl('/').value,
         },
+        publisher: { '@type': 'Person', name: 'Jonáš Ščipák', url: withSiteUrl('/').value },
         image: ogImageUrl.value,
         mainEntityOfPage: fullUrl.value,
         url: fullUrl.value,
         keywords: article.value.tags?.join(', '),
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Blog', item: blogUrl.value },
+          { '@type': 'ListItem', position: 2, name: article.value.title, item: fullUrl.value },
+        ],
       }),
     },
   ],
@@ -216,15 +231,24 @@ useHead({
   padding: 0;
 }
 
-/* Tabulky */
-.post table {
-  width: 100%;
+/* Tabulky (obalené v ProseTable.vue) */
+.post .table-wrap {
   margin: var(--space-6) 0;
-  border-collapse: separate;
-  border-spacing: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  overflow: hidden;
+  overflow-x: auto;
+}
+
+.post .table-wrap:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.post table {
+  width: 100%;
+  min-width: 36rem; /* na úzkém displeji se tabulka posouvá, sloupce se nemačkají */
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 1rem;
 }
 
@@ -295,12 +319,6 @@ useHead({
 
   .post h2 {
     font-size: 1.5rem;
-  }
-
-  /* široké tabulky se na mobilu posouvají do strany */
-  .post table {
-    display: block;
-    overflow-x: auto;
   }
 }
 </style>

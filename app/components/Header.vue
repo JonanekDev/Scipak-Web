@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const colorMode = useColorMode();
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 const toggleTheme = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
@@ -58,15 +58,21 @@ onUnmounted(() => {
         <span class="domain">scipak.eu </span>
       </NuxtLink>
 
-      <nav :class="{ 'is-open': isMobileMenuOpen }">
+      <nav id="main-nav" :aria-label="t('nav.main')" :class="{ 'is-open': isMobileMenuOpen }">
         <ul>
           <li>
-            <NuxtLink :to="{ path: localePath('/'), hash: '#about' }" @click="closeMobileMenu"
+            <NuxtLink
+              :to="{ path: localePath('/'), hash: '#about' }"
+              aria-current-value="false"
+              @click="closeMobileMenu"
               >~/about</NuxtLink
             >
           </li>
           <li>
-            <NuxtLink :to="{ path: localePath('/'), hash: '#contact' }" @click="closeMobileMenu"
+            <NuxtLink
+              :to="{ path: localePath('/'), hash: '#contact' }"
+              aria-current-value="false"
+              @click="closeMobileMenu"
               >~/contact</NuxtLink
             >
           </li>
@@ -80,7 +86,8 @@ onUnmounted(() => {
             @click="toggleLangMenu"
             class="lang-toggle"
             :class="{ 'is-active': isLangMenuOpen }"
-            aria-label="Změnit jazyk"
+            :aria-label="t('nav.lang')"
+            :aria-expanded="isLangMenuOpen"
           >
             {{ locale === 'cs' ? 'CS' : 'EN' }}
             <Icon name="lucide:chevron-down" class="chevron" />
@@ -110,11 +117,17 @@ onUnmounted(() => {
           </transition>
         </div>
 
-        <button @click="toggleTheme" class="theme-switch" aria-label="Přepnout motiv">
+        <button @click="toggleTheme" class="theme-switch" :aria-label="t('nav.theme')">
           <Icon v-if="colorMode.value === 'light'" name="lucide:moon" />
           <Icon v-else name="lucide:sun" />
         </button>
-        <button @click="toggleMobileMenu" class="mobile-toggle" aria-label="Menu">
+        <button
+          @click="toggleMobileMenu"
+          class="mobile-toggle"
+          :aria-label="t('nav.menu')"
+          :aria-expanded="isMobileMenuOpen"
+          aria-controls="main-nav"
+        >
           <Icon v-if="isMobileMenuOpen" name="lucide:x" />
           <Icon v-else name="lucide:menu" />
         </button>

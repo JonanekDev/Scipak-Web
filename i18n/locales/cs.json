@@ -1,31 +1,42 @@
 {
   "home": {
-    "seo_title": "Jonáš Ščipák - IT student & Junior Sysadmin",
-    "seo_description": "IT student a junior sysadmin z Olomouce se zaměřením na sítě, Linux, Proxmox a Docker infrastrukturu ve vlastním homelabu."
+    "seo_title": "Jonáš Ščipák - Junior Network Engineer & IT student",
+    "seo_description": "Junior network engineer a IT student z Olomouce. Navrhuji sítě a cloudové platformy a ve vlastním homelabu provozuji Proxmox HA, Docker Swarm a Linux."
   },
   "hero": {
-    "mono_comment": "// sysadmin & IT student na UP Olomouc",
+    "mono_comment": "// network engineer {'@'} Batlify · student IT na UP Olomouc",
     "title": "Ahoj, jsem Jonáš. Rád rozbíjím věci ve svém {homelab}.",
     "homelab_word": "homelabu",
     "subtitle": "Miluju sítě, servery a zkoumání toho jak věci fungují.",
     "learning_now": "Momentálně se učím: {learning_now_list}",
     "learning_now_list": "Kubernetes",
-    "cta": "Prozkoumej můj lab"
+    "cta": "Prozkoumej můj lab",
+    "cta_contact": "Napiš mi",
+    "photo_alt": "Fotka Jonáše Ščipáka"
   },
   "about": {
     "title": "O mně",
     "paragraph_1": "Jsem Jonáš, IT pro mě není jen obor který studuji, ale baví mě od dětství.",
-    "paragraph_2": "Vlastní homelab mám už přes 4 roky. Rád experimentuju, zkouším nové věci a učím se za pochodu. Aktuálně studuji {strong} a rád bych už při škole získal skutečnou praxi.",
+    "paragraph_2": "Vlastní homelab mám už přes 4 roky. Rád experimentuju, zkouším nové věci a učím se za pochodu. Aktuálně studuji {strong}.",
     "paragraph_2_strong": "IT na UPOLu",
-    "paragraph_3": "Aktuálně hledám práci v IT ať už jde o {strong}. Pokud zrovna někoho takového hledáte, neváhejte se ozvat.",
-    "paragraph_3_strong": "sítě, správu serverů nebo podporu uživatelů"
+    "paragraph_3": "Zároveň jsem otevřený novým projektům a příležitostem v IT, ať už jde o {strong}. Pokud potřebujete výpomoc nebo hledáte síťaře na svůj projekt, neváhejte se ozvat.",
+    "paragraph_3_strong": "sítě nebo správu serverů",
+    "paragraph_work": "Od ledna 2026 spolupracuji s firmou {company} jako junior network engineer. Zabývám se správou sítě a návrhem cloudové platformy při studiu."
   },
   "contact": {
     "title": "Kontakt",
-    "paragraph": "Ať už hledáte někoho na sítě, správu serverů nebo podporu, nebo si jen chcete popovídat o tom proč je Hyper-V lepší než Proxmox 😉, neváhejte se ozvat."
+    "paragraph": "Ať už hledáte někoho na sítě nebo správu serverů, nebo si jen chcete popovídat o tom proč je Hyper-V lepší než Proxmox 😉, neváhejte se ozvat."
   },
   "blog": {
     "title": "Blog",
-    "thumbnail_alt": "Náhledový obrázek pro {title}"
+    "thumbnail_alt": "Náhledový obrázek pro {title}",
+    "latest": "Nejnovější články",
+    "all_posts": "Všechny články"
+  },
+  "nav": {
+    "lang": "Změnit jazyk",
+    "theme": "Přepnout motiv",
+    "menu": "Menu",
+    "main": "Hlavní navigace"
   }
 }

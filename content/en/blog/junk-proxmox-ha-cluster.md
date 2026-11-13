@@ -3,14 +3,14 @@ title: 'Proxmox HA Cluster from old laptops'
 description: 'How does a Proxmox HA cluster built from old hardware I found at home work, and how long does a failover take?'
 tags: ['Proxmox']
 date: 2026-06-11
-thumbnail: '/imgs/blog/proxmox-junk-cluster/hardware.png'
+thumbnail: '/imgs/blog/proxmox-junk-cluster/hardware.webp'
 ---
 
 ## Proxmox VE HA Cluster on Old Hardware
 
 High availability (HA) sounds like an enterprise-level solution. Expensive hardware, expensive storage. But what if you built the whole thing using old computers that can barely handle browsing the web anymore and are just gathering dust at home?
 
-![Photo of my Proxmox clusteru](/imgs/blog/proxmox-junk-cluster/hardware.png)
+![Photo of my Proxmox cluster: two old laptops running btop and a monitor with a status dashboard of the nodes](/imgs/blog/proxmox-junk-cluster/hardware.webp)
 
 ## Hardware
 

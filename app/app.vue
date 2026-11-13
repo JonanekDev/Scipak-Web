@@ -1,5 +1,7 @@
 <script setup>
-console.log("Hi, I'm Jonáš :) I really love Windows server :)");
+if (import.meta.client) {
+  console.log("Hi, I'm Jonáš :) I really love Windows server :)");
+}
 
 const i18nHead = useLocaleHead({
   dir: true,

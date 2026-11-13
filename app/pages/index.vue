@@ -1,6 +1,7 @@
 <script setup>
 import AboutSection from '~/components/home/AboutSection.vue';
 import HeroSection from '~/components/home/HeroSection.vue';
+import BlogSection from '~/components/home/BlogSection.vue';
 import ContactSection from '~/components/home/ContactSection.vue';
 
 const { t } = useI18n();
@@ -15,7 +16,9 @@ useHead({
         '@type': 'Person',
         name: 'Jonáš Ščipák',
         url: 'https://scipak.eu',
-        jobTitle: 'Junior Sysadmin',
+        image: 'https://scipak.eu/imgs/home/jonas.webp',
+        jobTitle: 'Junior Network Engineer',
+        worksFor: { '@type': 'Organization', name: 'Batlify', url: 'https://batlify.com' },
         knowsAbout: ['Proxmox', 'Linux', 'Docker', 'Networking', 'Kubernetes', 'Homelab', 'Windows', 'Hyper-V', 'Clustering', 'Virtualization', 'Servers'],
         affiliation: {
           '@type': 'CollegeOrUniversity',
@@ -44,17 +47,18 @@ useSeoMeta({
   ogTitle: () => t('home.seo_title'),
   ogDescription: () => t('home.seo_description'),
   ogType: 'website',
-  ogImage: 'https://scipak.eu/imgs/og-cover.png',
+  ogImage: '/imgs/og-cover.png',
+  ogImageAlt: () => t('home.seo_title'),
   ogImageType: 'image/png',
   ogImageWidth: 1200,
   ogImageHeight: 630,
   twitterCard: 'summary_large_image',
-  twitterImage: 'https://scipak.eu/imgs/og-cover.png',
 });
 </script>
 <template>
   <HeroSection />
   <AboutSection />
+  <BlogSection />
   <ContactSection />
 </template>
 

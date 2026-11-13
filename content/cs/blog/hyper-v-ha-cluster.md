@@ -1,6 +1,6 @@
 ---
 title: 'Windows Hyper-V HA Cluster'
-description: 'Jak postavit Windows HA cluster s Hyper-V, Active Directory a iSCSI pomocí nested virtualizace. Postup krok za krokem, řešení častých chyb a test failoveru i live migrace.'
+description: 'Jak postavit Windows Hyper-V HA cluster s Active Directory a iSCSI pomocí nested virtualizace. Postup krok za krokem, včetně testu failoveru a live migrace.'
 tags: ['Windows', 'Hyper-V', 'Proxmox']
 date: 2026-10-25
 thumbnail: '/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg'
@@ -12,7 +12,7 @@ V předchozím článku jsem postavil [Proxmox HA Cluster ze starých noťasů](
 
 Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cluster jsem proto **postavil virtualizovaně na jednom Proxmox serveru** pomocí tzv. nested virtualizace (virtualizace uvnitř virtualizace). Ukážeme si, jak jsem takový plně virtualizovaný cluster rozjel.
 
-![Náhled videa](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
+![Náhled videa: Windows Hyper-V HA Cluster, tři obrazovky s modrou obrazovkou smrti](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
 
 ## Architektura
 
@@ -63,11 +63,11 @@ Na všech serverech jsem nastavil statické IP adresy. Na Hyper-V nodech jsem ja
 
 Pak stačí přidat roli Active Directory Domain Services a projít jednoduchým průvodcem, kde vytvoříme nový les (forest).
 
-![Create AD](/imgs/blog/hyper-v-ha-cluster/create-ad.png)
+![Průvodce konfigurací Active Directory Domain Services, vytvoření nového lesa s doménou rizek.local](/imgs/blog/hyper-v-ha-cluster/create-ad.webp)
 
 Potom do stejné domény připojíme oba Hyper-V nody. Je potřeba se přihlásit účtem Administrátora z naší domény a následně restartovat.
 
-![Join AD](/imgs/blog/hyper-v-ha-cluster/join-ad.png)
+![Připojení serveru HYPER-2 do domény rizek.local ve vlastnostech systému Windows](/imgs/blog/hyper-v-ha-cluster/join-ad.webp)
 
 ### 5. Instalace Hyper-V
 
@@ -85,7 +85,7 @@ Aby mohly virtuálky cestovat mezi nody za běhu, musí ležet na sdíleném úl
 
 Ve Failover Cluster Manageru jsem nejdřív spustil **Validate Configuration**, který zkontroluje síť, disky i nastavení obou serverů. U některých testů (třeba Validate Software Update Levels) mi to vyhodilo chyby. V labu jsem je ignoroval a pokračoval, v produkci by ale validace měla projít bez chyb. Potom stačilo kliknout na **Create Cluster**, vybrat oba nody a přiřadit clusteru vlastní IP adresu.
 
-![Výsledek Validate Configuration](/imgs/blog/hyper-v-ha-cluster/validate-errors.png)
+![Průvodce Validate a Configuration: většina testů prošla, Validate Required Services selhal a Software Update Levels hlásí varování](/imgs/blog/hyper-v-ha-cluster/validate-errors.webp)
 
 ### 8. Cluster Shared Volume a Witness
 
@@ -93,7 +93,7 @@ Připojené iSCSI disky se ve Failover Cluster Manageru (Storage → Disks) obje
 
 Witness se nastaví kliknutím pravým na celý cluster → More Actions → Configure Cluster Quorum Settings, kde vybereme disk witness a menší z disků.
 
-![Failover Cluster Manager - nody UP](/imgs/blog/hyper-v-ha-cluster/hyper-v-nodes.png)
+![Failover Cluster Manager s oběma nody HYPER-1 a HYPER-2 ve stavu Up](/imgs/blog/hyper-v-ha-cluster/hyper-v-nodes.webp)
 
 
 ### 9. Vytvoření virtuálek
@@ -102,7 +102,7 @@ Testovací virtuálky se nevytvářejí v obyčejném Hyper-V Manageru, ale př�
 
 Pro test jsem vytvořil dvě virtuálky: Windows s Remote Desktop aplikacemi (RemoteApp) a Windows s Minecraft serverem (Pomocí Crafty). Samozřejmě si tam můžete spustit i Linuxové virtuálky, ale když už máme ten Hyper-V cluster, tak zůstaneme u Windows.
 
-![RDApp](/imgs/blog/hyper-v-ha-cluster/rdapp.png)
+![Stránka RD Web Access s aplikacemi RemoteApp Calculator, Notepad a Paint](/imgs/blog/hyper-v-ha-cluster/rdapp.webp)
 
 ## Testy
 

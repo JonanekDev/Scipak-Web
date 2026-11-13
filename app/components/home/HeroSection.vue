@@ -1,3 +1,7 @@
+<script setup>
+const localePath = useLocalePath();
+</script>
+
 <template>
   <section id="hero">
     <div class="hero-content">
@@ -26,16 +30,29 @@
         </div>
 
         <ul class="tech-stack">
+          <li>BGP</li>
           <li>Proxmox HA</li>
-          <li>Docker Swarm</li>
-          <li>Ansible</li>
-          <li>Traefik</li>
+          <li>Hyper-V</li>
           <li>Linux</li>
+          <li>Docker</li>
           <li>WireGuard</li>
         </ul>
 
         <div class="cta-group">
-          <NuxtLink to="/blog" class="btn-primary"> {{ $t('hero.cta') }} </NuxtLink>
+          <NuxtLink
+            :to="{ path: localePath('/'), hash: '#blog' }"
+            aria-current-value="false"
+            class="btn-primary"
+          >
+            {{ $t('hero.cta') }}
+          </NuxtLink>
+          <NuxtLink
+            :to="{ path: localePath('/'), hash: '#contact' }"
+            aria-current-value="false"
+            class="btn-secondary"
+          >
+            {{ $t('hero.cta_contact') }}
+          </NuxtLink>
         </div>
       </div>
 
@@ -43,8 +60,11 @@
         <img
           src="/imgs/home/jonas.webp"
           class="hero-image"
-          alt="Jonáš Ščipák - photo"
-          fetchpriority="high"
+          :alt="$t('hero.photo_alt')"
+          width="1000"
+          height="1000"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>
@@ -153,6 +173,9 @@
 
 .cta-group {
   margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
 }
 
 @media (max-width: 959px) {

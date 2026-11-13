@@ -1,6 +1,6 @@
 ---
 title: 'Windows Hyper-V HA Cluster'
-description: 'How to build a Windows HA cluster with Hyper-V, Active Directory and iSCSI using nested virtualization. Step by step guide, fixes for common errors and tests of failover and live migration.'
+description: 'How to build a Windows Hyper-V HA cluster with Active Directory and iSCSI using nested virtualization. Step by step, with failover and live migration tests.'
 tags: ['Windows', 'Hyper-V', 'Proxmox']
 date: 2026-10-25
 thumbnail: '/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg'
@@ -12,7 +12,7 @@ In the previous article I built [Proxmox HA Cluster from old laptops](/blog/junk
 
 Windows eats more RAM than Proxmox and the RAM I have at home would not be enough. So I **built the cluster virtualized on one Proxmox server** using so called nested virtualization (virtualization inside of virtualization). Let's see how I got this fully virtualized cluster running.
 
-![Video thumbnail](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
+![Video thumbnail: Windows Hyper-V HA Cluster, three screens showing a blue screen of death](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
 
 ## Architecture
 
@@ -62,11 +62,11 @@ I set static IP addresses on all servers. On the Hyper-V nodes I put the address
 
 Then just add the role Active Directory Domain Services and go through the simple wizard, where we create a new forest.
 
-![Create AD](/imgs/blog/hyper-v-ha-cluster/create-ad.png)
+![Active Directory Domain Services Configuration Wizard creating a new forest with the root domain rizek.local](/imgs/blog/hyper-v-ha-cluster/create-ad.webp)
 
 After that we join both Hyper-V nodes to the same domain. You need to log in with the Administrator account from our domain and restart after that.
 
-![Join AD](/imgs/blog/hyper-v-ha-cluster/join-ad.png)
+![Joining the HYPER-2 server to the rizek.local domain in Windows system properties](/imgs/blog/hyper-v-ha-cluster/join-ad.webp)
 
 ### 5. Installing Hyper-V
 
@@ -84,7 +84,7 @@ The virtual machines need to be on a shared storage, so they can move between th
 
 In Failover Cluster Manager I first ran **Validate Configuration**, which checks network, disks and settings of both servers. Some tests (for example Validate Software Update Levels) gave me errors. In lab I ignored them and continued, but in production the validation should pass without errors. Then I just clicked on **Create Cluster**, selected both nodes and gave the cluster its own IP address.
 
-![Validate Configuration result](/imgs/blog/hyper-v-ha-cluster/validate-errors.png)
+![Validate a Configuration Wizard: most tests passed, Validate Required Services failed and Software Update Levels reported a warning](/imgs/blog/hyper-v-ha-cluster/validate-errors.webp)
 
 ### 8. Cluster Shared Volume and Witness
 
@@ -92,7 +92,7 @@ The connected iSCSI disks appear in Failover Cluster Manager (Storage → Disks)
 
 Witness is set by right clicking on the whole cluster → More Actions → Configure Cluster Quorum Settings, where we choose disk witness and the smaller disk.
 
-![Failover Cluster Manager - nodes UP](/imgs/blog/hyper-v-ha-cluster/hyper-v-nodes.png)
+![Failover Cluster Manager showing both nodes, HYPER-1 and HYPER-2, with status Up](/imgs/blog/hyper-v-ha-cluster/hyper-v-nodes.webp)
 
 ### 9. Creating virtual machines
 
@@ -100,7 +100,7 @@ The test virtual machines are not created in normal Hyper-V Manager, but directl
 
 For test I created two virtual machines: Windows with Remote Desktop apps (RemoteApp) and Windows with Minecraft server (using Crafty). Of course you can run Linux virtual machines there too, but when we already have this Hyper-V cluster, we stay with Windows.
 
-![RDApp](/imgs/blog/hyper-v-ha-cluster/rdapp.png)
+![RD Web Access page listing the RemoteApps Calculator, Notepad and Paint](/imgs/blog/hyper-v-ha-cluster/rdapp.webp)
 
 ## Tests
 

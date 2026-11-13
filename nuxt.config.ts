@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Roboto', preload: true },
-      { name: 'DB Mono', preload: true },
+      { name: 'DM Mono', preload: true },
     ],
   },
 
@@ -62,7 +62,7 @@ export default defineNuxtConfig({
         { name: 'twitter:card', content: 'summary_large_image' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Jonáš Ščipák' },
-        { property: 'og:image', content: 'https://scipak.eu/imgs/og-cover.png' },
+        { property: 'og:image', content: '/imgs/og-cover.png' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
       ],

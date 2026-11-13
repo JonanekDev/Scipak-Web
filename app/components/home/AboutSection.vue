@@ -9,6 +9,11 @@
         </strong>
       </template>
     </i18n-t>
+    <i18n-t keypath="about.paragraph_work" tag="p">
+      <template #company>
+        <a href="https://batlify.com" target="_blank" rel="noopener">Batlify</a>
+      </template>
+    </i18n-t>
     <i18n-t keypath="about.paragraph_3" tag="p">
       <template #strong>
         <strong>

@@ -12,7 +12,7 @@
 
   --color-text: #e4e4e7;
   --color-text-muted: #a1a1aa;
-  --color-text-disabled: #71717a;
+  --color-text-disabled: #8a8a94;
 
   --color-border: #27272a;
   --color-border-subtle: #1f1f23;
@@ -48,7 +48,7 @@ html[data-theme='light'] {
 
   --color-text: #09090b;
   --color-text-muted: #52525b;
-  --color-text-disabled: #71717a;
+  --color-text-disabled: #6b6b74;
 
   --color-border: #e4e4e7;
   --color-border-subtle: #f4f4f5;
