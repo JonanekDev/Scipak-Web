@@ -35,6 +35,19 @@ const words = (n) =>
 const readMinutes = Math.max(1, Math.round(words(article.value.body.value) / 200));
 const toc = article.value.body.toc?.links ?? [];
 
+const active = ref('');
+const flat = (ls) => ls.flatMap((l) => [l.id, ...flat(l.children ?? [])]);
+function spy() {
+  const ids = flat(toc);
+  active.value =
+    ids.findLast((id) => document.getElementById(id)?.getBoundingClientRect().top <= 100) ?? '';
+}
+onMounted(() => {
+  spy();
+  window.addEventListener('scroll', spy, { passive: true });
+});
+onBeforeUnmount(() => window.removeEventListener('scroll', spy));
+
 const fullUrl = withSiteUrl(route.path);
 const ogImageUrl = withSiteUrl(article.value.thumbnail);
 const published = new Date(article.value.date).toISOString();
@@ -122,7 +135,7 @@ useHead({
       <div class="post-main">
         <details v-if="toc.length" class="toc-mobile">
           <summary class="mono">{{ $t('blog.toc') }}</summary>
-          <ArticleToc :links="toc" />
+          <ArticleToc :links="toc" :active="active" />
         </details>
         <div class="post">
           <ContentRenderer :value="article" />
@@ -140,7 +153,7 @@ useHead({
       </div>
       <aside v-if="toc.length" class="toc-desktop">
         <p class="mono">{{ $t('blog.toc') }}</p>
-        <ArticleToc :links="toc" />
+        <ArticleToc :links="toc" :active="active" />
       </aside>
     </div>
   </article>
@@ -211,6 +224,11 @@ useHead({
 .toc-desktop a,
 .toc-mobile a {
   color: var(--color-text-muted);
+}
+
+.toc-desktop a.active,
+.toc-mobile a.active {
+  color: var(--color-primary);
 }
 
 .toc-desktop a:hover,
