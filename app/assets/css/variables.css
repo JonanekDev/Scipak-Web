@@ -8,7 +8,6 @@
   --color-primary-subtle: #1caf8720;
   --color-on-primary: #000000;
   --color-secondary: #3b8de0;
-  --color-accent: #b6d848;
 
   --color-text: #e4e4e7;
   --color-text-muted: #a1a1aa;
@@ -44,7 +43,6 @@ html[data-theme='light'] {
   --color-primary-subtle: #1caf8715;
   --color-on-primary: #ffffff;
   --color-secondary: #07518d;
-  --color-accent: #65770d;
 
   --color-text: #09090b;
   --color-text-muted: #52525b;

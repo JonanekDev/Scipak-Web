@@ -21,17 +21,25 @@
     "paragraph_2_strong": "IT na UPOLu",
     "paragraph_3": "Zároveň jsem otevřený novým projektům a příležitostem v IT, ať už jde o {strong}. Pokud potřebujete výpomoc nebo hledáte síťaře na svůj projekt, neváhejte se ozvat.",
     "paragraph_3_strong": "sítě nebo správu serverů",
-    "paragraph_work": "Od ledna 2026 spolupracuji s firmou {company} jako junior network engineer. Zabývám se správou sítě a návrhem cloudové platformy při studiu."
+    "paragraph_work": "Od ledna 2026 spolupracuji s firmou {company} jako junior network engineer. Zabývám se správou sítě a návrhem cloudové platformy při studiu.",
+    "status": "otevřený novým projektům"
   },
   "contact": {
-    "title": "Kontakt",
-    "paragraph": "Ať už hledáte někoho na sítě nebo správu serverů, nebo si jen chcete popovídat o tom proč je Hyper-V lepší než Proxmox 😉, neváhejte se ozvat."
+    "cta_title": "Pojďme si popovídat",
+    "cta_text": "Potřebujete pomoct se sítěmi nebo servery, nebo se chcete hádat, proč je Hyper-V lepší než Proxmox? 😉",
+    "cta_email": "Napište mi"
   },
   "blog": {
     "title": "Blog",
     "thumbnail_alt": "Náhledový obrázek pro {title}",
     "latest": "Nejnovější články",
-    "all_posts": "Všechny články"
+    "all_posts": "Všechny články",
+    "min_read": "{n} min čtení",
+    "toc": "Obsah",
+    "prev": "Předchozí",
+    "next": "Další",
+    "copy": "Kopírovat",
+    "copied": "Zkopírováno"
   },
   "nav": {
     "lang": "Změnit jazyk",

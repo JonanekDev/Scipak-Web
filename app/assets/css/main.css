@@ -49,7 +49,7 @@ p {
 }
 
 strong {
-  color: var(--color-accent);
+  color: var(--color-text);
   font-weight: 600;
 }
 
@@ -79,8 +79,8 @@ main.container {
   padding: 0 var(--space-4);
 }
 
-.container-narrow {
-  max-width: 800px;
+section > p {
+  max-width: 70ch;
 }
 
 /* Buttons */
@@ -135,7 +135,7 @@ main.container {
 h1.title {
   font-family: 'DM Mono', monospace;
   margin: var(--space-8) 0;
-  color: var(--color-primary);
+  color: var(--color-text);
 }
 
 h1.title::before {

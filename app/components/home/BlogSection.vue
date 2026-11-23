@@ -14,12 +14,14 @@ const { data: articles } = await useAsyncData(
 </script>
 
 <template>
-  <section v-if="articles?.length" id="blog" class="container container-narrow">
+  <section v-if="articles?.length" id="blog" class="container">
     <h2 class="section-title">{{ $t('blog.latest') }}</h2>
     <div class="articles-list">
       <BlogCard v-for="article in articles" :key="article.path" :article="article" />
     </div>
-    <NuxtLink :to="localePath('/blog')" class="all-posts mono">{{ $t('blog.all_posts') }} →</NuxtLink>
+    <NuxtLink :to="localePath('/blog')" class="all-posts mono"
+      >{{ $t('blog.all_posts') }} →</NuxtLink
+    >
   </section>
 </template>
 

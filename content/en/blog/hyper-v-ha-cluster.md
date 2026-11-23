@@ -6,11 +6,9 @@ date: 2026-10-25
 thumbnail: '/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg'
 ---
 
-## Hyper-V HA Cluster on virtualized hardware
-
 In the previous article I built [Proxmox HA Cluster from old laptops](/blog/junk-proxmox-ha-cluster) from old junk that I found at home. But Proxmox is Linux solution and Microsoft of course has its own one. And maybe it is even better? So I decided to build Hyper-V HA Cluster.
 
-Windows eats more RAM than Proxmox and the RAM I have at home would not be enough. So I **built the cluster virtualized on one Proxmox server** using so called nested virtualization (virtualization inside of virtualization). Let's see how I got this fully virtualized cluster running.
+Windows eats more RAM than Proxmox and the RAM I have at home would not be enough. So I built the cluster virtualized on one Proxmox server using so called nested virtualization (virtualization inside of virtualization). Let's see how I got this fully virtualized cluster running.
 
 ![Video thumbnail: Windows Hyper-V HA Cluster, three screens showing a blue screen of death](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
 
@@ -41,7 +39,7 @@ Y
 
 If it prints `Y` it is enabled. For AMD processor you check `kvm_amd`. You can also find how to enable it in the [Proxmox documentation](https://pve.proxmox.com/wiki/Nested_Virtualization).
 
-For the VMs it is enough to set CPU type to `host`. In Windows VMs you need to do it **before the installation** (see [Problems](#problems-and-solutions)).
+For the VMs it is enough to set CPU type to `host`. In Windows VMs you need to do it before the installation (see [Problems](#problems-and-solutions)).
 
 ### 2. Installing Windows servers
 
@@ -70,7 +68,7 @@ After that we join both Hyper-V nodes to the same domain. You need to log in wit
 
 ### 5. Installing Hyper-V
 
-On both nodes we install the role **Hyper-V** (restart after the installation) and the feature **Failover Clustering**.
+On both nodes we install the role Hyper-V (restart after the installation) and the feature Failover Clustering.
 
 ### 6. Shared iSCSI storage
 
@@ -82,7 +80,7 @@ The virtual machines need to be on a shared storage, so they can move between th
 
 ### 7. Validation and creating the cluster
 
-In Failover Cluster Manager I first ran **Validate Configuration**, which checks network, disks and settings of both servers. Some tests (for example Validate Software Update Levels) gave me errors. In lab I ignored them and continued, but in production the validation should pass without errors. Then I just clicked on **Create Cluster**, selected both nodes and gave the cluster its own IP address.
+In Failover Cluster Manager I first ran Validate Configuration, which checks network, disks and settings of both servers. Some tests (for example Validate Software Update Levels) gave me errors. In lab I ignored them and continued, but in production the validation should pass without errors. Then I just clicked on Create Cluster, selected both nodes and gave the cluster its own IP address.
 
 ![Validate a Configuration Wizard: most tests passed, Validate Required Services failed and Software Update Levels reported a warning](/imgs/blog/hyper-v-ha-cluster/validate-errors.webp)
 

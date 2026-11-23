@@ -1,6 +1,7 @@
 <script setup>
 const route = useRoute();
 const { locale } = useI18n();
+const localePath = useLocalePath();
 
 const collectionName = locale.value === 'cs' ? 'blog_cs' : 'blog_en';
 
@@ -16,6 +17,23 @@ if (!article.value) {
     statusMessage: 'Article not found',
   });
 }
+
+const { data: surround } = await useAsyncData(`surround-${collectionName}-${searchPath}`, () =>
+  queryCollectionItemSurroundings(collectionName, searchPath, { fields: ['title'] }).order(
+    'date',
+    'DESC',
+  ),
+);
+const [newer, older] = surround.value ?? [];
+
+const words = (n) =>
+  typeof n === 'string'
+    ? n.split(/\s+/).filter(Boolean).length
+    : Array.isArray(n)
+      ? n.slice(2).reduce((a, c) => a + words(c), 0)
+      : 0;
+const readMinutes = Math.max(1, Math.round(words(article.value.body.value) / 200));
+const toc = article.value.body.toc?.links ?? [];
 
 const fullUrl = withSiteUrl(route.path);
 const ogImageUrl = withSiteUrl(article.value.thumbnail);
@@ -81,33 +99,172 @@ useHead({
 <template>
   <article>
     <h1 class="title">{{ article.title }}</h1>
-    <time class="post-date" :datetime="article.date">
-      {{
-        new Date(article.date).toLocaleDateString(locale, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })
-      }}
-    </time>
-    <div class="post">
-      <ContentRenderer :value="article" />
+    <p class="post-meta mono">
+      <time :datetime="article.date">
+        {{
+          new Date(article.date).toLocaleDateString(locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        }}
+      </time>
+      · {{ $t('blog.min_read', { n: readMinutes }) }}
+      <NuxtLink
+        v-for="tag in article.tags"
+        :key="tag"
+        :to="{ path: localePath('/blog'), query: { tag } }"
+        class="tag"
+        >{{ tag }}</NuxtLink
+      >
+    </p>
+    <div class="post-layout">
+      <div class="post-main">
+        <details v-if="toc.length" class="toc-mobile">
+          <summary class="mono">{{ $t('blog.toc') }}</summary>
+          <ArticleToc :links="toc" />
+        </details>
+        <div class="post">
+          <ContentRenderer :value="article" />
+        </div>
+        <nav v-if="newer || older" class="post-nav">
+          <NuxtLink v-if="older" :to="localePath(older.path)" class="prev"
+            ><span class="mono">← {{ $t('blog.prev') }}</span
+            >{{ older.title }}</NuxtLink
+          >
+          <NuxtLink v-if="newer" :to="localePath(newer.path)" class="next"
+            ><span class="mono">{{ $t('blog.next') }} →</span>{{ newer.title }}</NuxtLink
+          >
+        </nav>
+        <ContactBox />
+      </div>
+      <aside v-if="toc.length" class="toc-desktop">
+        <p class="mono">{{ $t('blog.toc') }}</p>
+        <ArticleToc :links="toc" />
+      </aside>
     </div>
   </article>
 </template>
 
 <style>
-.article {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.post-date {
-  font-family: 'DM Mono', monospace;
+.post-meta {
   font-size: 13px;
   color: var(--color-text-disabled);
-  display: block;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.post-meta .tag {
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+}
+
+.post-meta .tag:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.post-layout {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.post-main {
+  min-width: 0;
+}
+
+.toc-desktop {
+  display: none;
+}
+
+.toc-mobile {
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+
+.toc-mobile summary {
+  cursor: pointer;
+}
+
+.toc-desktop ul,
+.toc-mobile ul {
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.toc-desktop ul ul,
+.toc-mobile ul ul {
+  padding-left: var(--space-4);
+}
+
+.toc-desktop li,
+.toc-mobile li {
+  margin-top: var(--space-2);
+}
+
+.toc-desktop a,
+.toc-mobile a {
+  color: var(--color-text-muted);
+}
+
+.toc-desktop a:hover,
+.toc-mobile a:hover {
+  color: var(--color-primary);
+}
+
+.toc-desktop p {
+  font-size: 0.85rem;
+  color: var(--color-text-disabled);
+  margin-bottom: 0;
+}
+
+@media (min-width: 1100px) {
+  .post-layout {
+    grid-template-columns: minmax(0, 860px) 240px;
+    justify-content: space-between;
+  }
+
+  .toc-desktop {
+    display: block;
+    position: sticky;
+    top: var(--space-16);
+    align-self: start;
+  }
+
+  .toc-mobile {
+    display: none;
+  }
+}
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+}
+
+.post-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-width: 48%;
+  color: var(--color-text);
+}
+
+.post-nav .next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.post-nav span {
+  font-size: 0.8rem;
+  color: var(--color-text-disabled);
 }
 
 /* Nadpisy */
@@ -127,7 +284,7 @@ useHead({
   font-size: 1.75rem;
   line-height: 1.3;
   font-weight: 700;
-  color: var(--color-secondary);
+  color: var(--color-text);
   margin: var(--space-16) 0 var(--space-6);
   padding-bottom: var(--space-2);
   border-bottom: 1px solid var(--color-border);
@@ -148,7 +305,20 @@ useHead({
   margin: var(--space-8) 0 var(--space-2);
 }
 
+.post h2::before {
+  content: '// ';
+  color: var(--color-text-disabled);
+  font-family: 'DM Mono', monospace;
+}
+
 /* Text a seznamy */
+.post p,
+.post ul,
+.post ol,
+.post blockquote {
+  max-width: 70ch;
+}
+
 .post p {
   font-size: 1.125rem;
   line-height: 1.75;

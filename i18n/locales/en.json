@@ -21,17 +21,25 @@
     "paragraph_2_strong": "IT at Palacký University Olomouc",
     "paragraph_3": "I'm also open to new projects and opportunities in IT, whether it involves {strong}. If you need a hand or you're looking for a networking person for your project, don't hesitate to get in touch.",
     "paragraph_3_strong": "networking or server administration",
-    "paragraph_work": "Since January 2026 I've been working with {company} as a junior network engineer, handling network administration and designing their cloud platform alongside my studies."
+    "paragraph_work": "Since January 2026 I've been working with {company} as a junior network engineer, handling network administration and designing their cloud platform alongside my studies.",
+    "status": "open to new projects"
   },
   "contact": {
-    "title": "Contact",
-    "paragraph": "Whether you need someone for networking or server administration, or you just want to chat about why Hyper-V is better than Proxmox 😉, feel free to reach out."
+    "cta_title": "Let's talk",
+    "cta_text": "Need a hand with networking or servers, or want to argue why Hyper-V beats Proxmox? 😉",
+    "cta_email": "Email me"
   },
   "blog": {
     "title": "Blog",
     "thumbnail_alt": "Thumbnail for {title}",
     "latest": "Latest posts",
-    "all_posts": "All posts"
+    "all_posts": "All posts",
+    "min_read": "{n} min read",
+    "toc": "Contents",
+    "prev": "Previous",
+    "next": "Next",
+    "copy": "Copy",
+    "copied": "Copied"
   },
   "nav": {
     "lang": "Change language",

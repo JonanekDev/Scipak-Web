@@ -6,8 +6,6 @@ date: 2026-06-11
 thumbnail: '/imgs/blog/proxmox-junk-cluster/hardware.webp'
 ---
 
-## Proxmox VE HA Cluster na starém hardwaru
-
 Vysoká dostupnost (HA) zní jako enterprise záležitost. Drahý hardware, drahé úložiště. Ale co když to celé postavíte ze starých počítačů, které už skoro nezvládají ani procházení webů a jen doma sbírají prach?
 
 ![Fotka mého Proxmox clusteru: dva staré notebooky s běžícím btop a monitor se stavovým dashboardem nodů](/imgs/blog/proxmox-junk-cluster/hardware.webp)

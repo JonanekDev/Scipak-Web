@@ -6,11 +6,9 @@ date: 2026-10-25
 thumbnail: '/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg'
 ---
 
-## Hyper-V HA Cluster na virtualizovaném hardwaru
-
 V předchozím článku jsem postavil [Proxmox HA Cluster ze starých noťasů](/cs/blog/junk-proxmox-ha-cluster) ze starého železa, co dům dal. Jenže Proxmox je řešení postavené na Linuxu a Microsoft má samozřejmě to svoje. A třeba je i lepší? Proto jsem se rozhodl postavit Hyper-V HA Cluster.
 
-Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cluster jsem proto **postavil virtualizovaně na jednom Proxmox serveru** pomocí tzv. nested virtualizace (virtualizace uvnitř virtualizace). Ukážeme si, jak jsem takový plně virtualizovaný cluster rozjel.
+Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cluster jsem proto postavil virtualizovaně na jednom Proxmox serveru pomocí tzv. nested virtualizace (virtualizace uvnitř virtualizace). Ukážeme si, jak jsem takový plně virtualizovaný cluster rozjel.
 
 ![Náhled videa: Windows Hyper-V HA Cluster, tři obrazovky s modrou obrazovkou smrti](/imgs/blog/hyper-v-ha-cluster/thumbnail.jpeg)
 
@@ -42,7 +40,7 @@ Y
 
 Pokud vypíše `Y` je povolená. U AMD procesoru se kontroluje `kvm_amd`. Případně najdete návod na povolení v [dokumentaci Proxmoxu](https://pve.proxmox.com/wiki/Nested_Virtualization).
 
-U virtuálek pak stačí nastavit CPU type na `host`. U Windows VM je potřeba to udělat **před instalací** (viz [Problémy](#problémy-a-řešení)).
+U virtuálek pak stačí nastavit CPU type na `host`. U Windows VM je potřeba to udělat před instalací (viz [Problémy](#problémy-a-řešení)).
 
 ### 2. Instalace Windows serverů
 
@@ -71,7 +69,7 @@ Potom do stejné domény připojíme oba Hyper-V nody. Je potřeba se přihlási
 
 ### 5. Instalace Hyper-V
 
-Na obou nodech nainstalujeme roli **Hyper-V** (po instalaci restart) a feature **Failover Clustering**.
+Na obou nodech nainstalujeme roli Hyper-V (po instalaci restart) a feature Failover Clustering.
 
 ### 6. Sdílené iSCSI úložiště
 
@@ -83,7 +81,7 @@ Aby mohly virtuálky cestovat mezi nody za běhu, musí ležet na sdíleném úl
 
 ### 7. Validace a vytvoření clusteru
 
-Ve Failover Cluster Manageru jsem nejdřív spustil **Validate Configuration**, který zkontroluje síť, disky i nastavení obou serverů. U některých testů (třeba Validate Software Update Levels) mi to vyhodilo chyby. V labu jsem je ignoroval a pokračoval, v produkci by ale validace měla projít bez chyb. Potom stačilo kliknout na **Create Cluster**, vybrat oba nody a přiřadit clusteru vlastní IP adresu.
+Ve Failover Cluster Manageru jsem nejdřív spustil Validate Configuration, který zkontroluje síť, disky i nastavení obou serverů. U některých testů (třeba Validate Software Update Levels) mi to vyhodilo chyby. V labu jsem je ignoroval a pokračoval, v produkci by ale validace měla projít bez chyb. Potom stačilo kliknout na Create Cluster, vybrat oba nody a přiřadit clusteru vlastní IP adresu.
 
 ![Průvodce Validate a Configuration: většina testů prošla, Validate Required Services selhal a Software Update Levels hlásí varování](/imgs/blog/hyper-v-ha-cluster/validate-errors.webp)
 

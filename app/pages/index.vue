@@ -2,7 +2,6 @@
 import AboutSection from '~/components/home/AboutSection.vue';
 import HeroSection from '~/components/home/HeroSection.vue';
 import BlogSection from '~/components/home/BlogSection.vue';
-import ContactSection from '~/components/home/ContactSection.vue';
 
 const { t } = useI18n();
 
@@ -19,7 +18,19 @@ useHead({
         image: 'https://scipak.eu/imgs/home/jonas.webp',
         jobTitle: 'Junior Network Engineer',
         worksFor: { '@type': 'Organization', name: 'Batlify', url: 'https://batlify.com' },
-        knowsAbout: ['Proxmox', 'Linux', 'Docker', 'Networking', 'Kubernetes', 'Homelab', 'Windows', 'Hyper-V', 'Clustering', 'Virtualization', 'Servers'],
+        knowsAbout: [
+          'Proxmox',
+          'Linux',
+          'Docker',
+          'Networking',
+          'Kubernetes',
+          'Homelab',
+          'Windows',
+          'Hyper-V',
+          'Clustering',
+          'Virtualization',
+          'Servers',
+        ],
         affiliation: {
           '@type': 'CollegeOrUniversity',
           name: 'Palacký University Olomouc',
@@ -36,7 +47,7 @@ useHead({
           'https://www.youtube.com/@scipakos',
           'https://www.instagram.com/jonasscipak/',
         ],
-        alternateName: 'Jonas Scipak'
+        alternateName: 'Jonas Scipak',
       }),
     },
   ],
@@ -59,7 +70,7 @@ useSeoMeta({
   <HeroSection />
   <AboutSection />
   <BlogSection />
-  <ContactSection />
+  <ContactBox id="contact" />
 </template>
 
 <style>
