@@ -46,5 +46,15 @@
     "theme": "Přepnout motiv",
     "menu": "Menu",
     "main": "Hlavní navigace"
+  },
+  "projects": {
+    "title": "Projekty",
+    "chart_monitor": {
+      "description": "Je tenhle upgrade Helm chartu bezpečný? Stačí mu dát ArgoCD repozitář: vyrenderuje charty s tvými values a ukáže, co upgrade změní, které image zaostávají a které CVE nová verze opraví.",
+      "feature_1": "Odhalí rizikové upgrady: zmizelé values, immutable pole, změny RBAC",
+      "feature_2": "Porovná CVE aktuálních a nových image (Trivy)",
+      "feature_3": "Hlásí novinky, na Discord nebo webhook",
+      "alt": "Chart Monitor ukazuje upgrade Argo CD chartu s varováním k RBAC a opravenými CVE"
+    }
   }
 }

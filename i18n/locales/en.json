@@ -46,5 +46,15 @@
     "theme": "Toggle theme",
     "menu": "Menu",
     "main": "Main navigation"
+  },
+  "projects": {
+    "title": "Projects",
+    "chart_monitor": {
+      "description": "Is this Helm upgrade safe to roll out? Point it at an ArgoCD repo and it renders every chart with your own values, then shows what the upgrade changes, which images are falling behind, and which CVEs the new version fixes.",
+      "feature_1": "Catches risky upgrades: removed values, immutable fields, RBAC changes",
+      "feature_2": "Compares CVEs of current and new images (Trivy)",
+      "feature_3": "Notifies what's new, via Discord or webhook",
+      "alt": "Chart Monitor showing an Argo CD chart upgrade with RBAC warning and fixed CVEs"
+    }
   }
 }

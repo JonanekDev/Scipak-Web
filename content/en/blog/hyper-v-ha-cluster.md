@@ -14,11 +14,11 @@ Windows eats more RAM than Proxmox and the RAM I have at home would not be enoug
 
 ## Architecture
 
-| VM name | Role in the cluster | vCPU | RAM | Disks |
-|---|---|---|---|---|
-| WIN-AD | Domain controller, DNS, iSCSI Target (data + witness) | 6 | 8 GB | OS + 100 GB for iSCSI |
-| Hyper-1 | Hyper-V node 1 | 8 | 24 GB | Only OS (VMs are on iSCSI) |
-| Hyper-2 | Hyper-V node 2 | 8 | 24 GB | Only OS (VMs are on iSCSI) |
+| VM name | Role in the cluster                                   | vCPU | RAM   | Disks                      |
+| ------- | ----------------------------------------------------- | ---- | ----- | -------------------------- |
+| WIN-AD  | Domain controller, DNS, iSCSI Target (data + witness) | 6    | 8 GB  | OS + 100 GB for iSCSI      |
+| Hyper-1 | Hyper-V node 1                                        | 8    | 24 GB | Only OS (VMs are on iSCSI) |
+| Hyper-2 | Hyper-V node 2                                        | 8    | 24 GB | Only OS (VMs are on iSCSI) |
 
 - **Why Active Directory?** The cluster normally depends of a domain: it handles permissions between the nodes through it and creates its own objects there. Workgroup cluster exist, but in Hyper-V the live migration doesn't work in it.
 
@@ -33,7 +33,7 @@ Windows eats more RAM than Proxmox and the RAM I have at home would not be enoug
 To turn on Hyper-V inside of virtual Windows Server we need to use nested virtualization (virtualization inside of virtual machine). Proxmox has it enabled in most cases, but you can check it with this command:
 
 ```
-root@rizek-pve:~# cat /sys/module/kvm_intel/parameters/nested 
+root@rizek-pve:~# cat /sys/module/kvm_intel/parameters/nested
 Y
 ```
 
@@ -49,8 +49,8 @@ You can just download [Evaluation Windows Server](https://www.microsoft.com/en-u
 
 Windows doesn't has drivers for virtio devices by default (VirtIO SCSI, VirtIO network card etc.). There are two ways how to solve it:
 
-* **Easier:** choose IDE disk and Intel E1000E network card when creating the VM, Windows has drivers for these right away.
-* **Better:** download the ISO with [VirtIO drivers for Windows](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/). Proxmox will offer adding this ISO next to the system one when you choose Windows.
+- **Easier:** choose IDE disk and Intel E1000E network card when creating the VM, Windows has drivers for these right away.
+- **Better:** download the ISO with [VirtIO drivers for Windows](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/). Proxmox will offer adding this ISO next to the system one when you choose Windows.
 
 I choose the VirtIO drivers. During the installation we see that Windows can't see our disk, but it's not a problem. Just click on Load driver, find the ISO with VirtIO drivers and the driver for disk controller is in `vioscsi\2k25\amd64` (or according to your Windows version). After that the disk appears. The rest of drivers (network and others) we install after the system installation with `virtio-win-gt-x64.exe` from the same ISO.
 
@@ -104,16 +104,16 @@ For test I created two virtual machines: Windows with Remote Desktop apps (Remot
 
 Next to it I had Uptime Kuma running and watched what happens during the move while running and during unplanned outage.
 
-* **Live migration (Move → Live Migration):** RAM of the running VM was copied over the network to the second node in the background. Uptime Kuma didn't record any outage. On RDP a short lag was noticeable when typing, on Minecraft nothing was noticeable at all.
+- **Live migration (Move → Live Migration):** RAM of the running VM was copied over the network to the second node in the background. Uptime Kuma didn't record any outage. On RDP a short lag was noticeable when typing, on Minecraft nothing was noticeable at all.
 
-* **Unplanned failover:** I simulated the outage by disconnecting the network of one node and I tested it on the VM with RDP. The second node detected it after about a minute, but the VM started on it after approx. 4 minutes and RDP was available after almost 6 minutes. I didn't try the failover on Minecraft server, but the result will be similar, just little bit longer, because after Windows starts, Java and the server itself must start too.
+- **Unplanned failover:** I simulated the outage by disconnecting the network of one node and I tested it on the VM with RDP. The second node detected it after about a minute, but the VM started on it after approx. 4 minutes and RDP was available after almost 6 minutes. I didn't try the failover on Minecraft server, but the result will be similar, just little bit longer, because after Windows starts, Java and the server itself must start too.
 
-| Test | Result |
-|---|---|
-| Live migration (RDP) | short lag when typing |
-| Live migration (Minecraft) | no noticeable outage |
-| Failover: VM started on the second node (RDP) | approx. 4 min |
-| Failover: RDP available again | approx. 6 min |
+| Test                                          | Result                |
+| --------------------------------------------- | --------------------- |
+| Live migration (RDP)                          | short lag when typing |
+| Live migration (Minecraft)                    | no noticeable outage  |
+| Failover: VM started on the second node (RDP) | approx. 4 min         |
+| Failover: RDP available again                 | approx. 6 min         |
 
 ## Problems and solutions
 

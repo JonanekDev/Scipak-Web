@@ -14,12 +14,11 @@ Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cl
 
 ## Architektura
 
-| Název VM | Role v clusteru | vCPU | RAM | Disky |
-|---|---|---|---|---|
-| WIN-AD | Doménový řadič, DNS, iSCSI Target (data + witness) | 6 | 8 GB | OS + 100 GB pro iSCSI |
-| Hyper-1 | Hyper-V node 1 | 8 | 24 GB | Jen OS (VM jsou na iSCSI) |
-| Hyper-2 | Hyper-V node 2 | 8 | 24 GB | Jen OS (VM jsou na iSCSI) |
-
+| Název VM | Role v clusteru                                    | vCPU | RAM   | Disky                     |
+| -------- | -------------------------------------------------- | ---- | ----- | ------------------------- |
+| WIN-AD   | Doménový řadič, DNS, iSCSI Target (data + witness) | 6    | 8 GB  | OS + 100 GB pro iSCSI     |
+| Hyper-1  | Hyper-V node 1                                     | 8    | 24 GB | Jen OS (VM jsou na iSCSI) |
+| Hyper-2  | Hyper-V node 2                                     | 8    | 24 GB | Jen OS (VM jsou na iSCSI) |
 
 - **Proč Active Directory?** Cluster se standardně opírá o doménu: řeší přes ni oprávnění mezi nody a vytváří si v ní vlastní objekty. Workgroup cluster sice existuje, ale u Hyper-V v něm nefunguje live migrace.
 
@@ -34,7 +33,7 @@ Windows papají víc RAM než Proxmox a RAM, kterou mám doma, by nestačila. Cl
 Aby šlo uvnitř virtuálního Windows Serveru zapnout Hyper-V, musíme použít nested virtualizaci (virtualizaci uvnitř virtuálky). Proxmox ji má ve většině případů povolenou, ale můžete si to ověřit příkazem:
 
 ```
-root@rizek-pve:~# cat /sys/module/kvm_intel/parameters/nested 
+root@rizek-pve:~# cat /sys/module/kvm_intel/parameters/nested
 Y
 ```
 
@@ -50,8 +49,8 @@ Stačí si stáhnout [Evaluation Windows Server](https://www.microsoft.com/en-us
 
 Windows defaultně neobsahuje drivery pro virtio zařízení (VirtIO SCSI, VirtIO síťovka atd.). To jde vyřešit dvěma způsoby:
 
-* **Jednodušší:** při vytváření VM zvolit IDE disk a síťovku Intel E1000E, pro které má Windows drivery rovnou.
-* **Lepší:** stáhnout si ISO s [VirtIO drivery pro Windows](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/). Proxmox při zvolení Windows rovnou nabídne přidání tohoto ISO vedle systémového.
+- **Jednodušší:** při vytváření VM zvolit IDE disk a síťovku Intel E1000E, pro které má Windows drivery rovnou.
+- **Lepší:** stáhnout si ISO s [VirtIO drivery pro Windows](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/). Proxmox při zvolení Windows rovnou nabídne přidání tohoto ISO vedle systémového.
 
 Já jsem zvolil VirtIO drivery. Při instalaci pak uvidíme, že Windows nevidí náš disk, ale to nevadí. Stačí kliknout na Load driver, najít ISO s VirtIO drivery a driver pro diskový řadič je v `vioscsi\2k25\amd64` (případně podle vaší verze Windows). Potom se disk objeví. Zbytek driverů (síť a další) doinstalujeme až po instalaci systému pomocí `virtio-win-gt-x64.exe` ze stejného ISO.
 
@@ -93,7 +92,6 @@ Witness se nastaví kliknutím pravým na celý cluster → More Actions → Con
 
 ![Failover Cluster Manager s oběma nody HYPER-1 a HYPER-2 ve stavu Up](/imgs/blog/hyper-v-ha-cluster/hyper-v-nodes.webp)
 
-
 ### 9. Vytvoření virtuálek
 
 Testovací virtuálky se nevytvářejí v obyčejném Hyper-V Manageru, ale přímo ve Failover Cluster Manageru (Roles → Virtual Machines → New Virtual Machine) s umístěním na již zmíněný `C:\ClusterStorage\Volume1`. ISO soubor můžeme klidně vybrat z lokálního disku serveru, jen ho po instalaci musíme odebrat, jinak nebude fungovat failover ani live migrace.
@@ -106,16 +104,16 @@ Pro test jsem vytvořil dvě virtuálky: Windows s Remote Desktop aplikacemi (Re
 
 Vedle jsem si pustil Uptime Kuma a sledoval, co se stane při přesunu za běhu a při neplánovaném výpadku.
 
-* **Live migrace (Move → Live Migration):** RAM běžící virtuálky se na pozadí přelila přes síť na druhý node. Uptime Kuma nezaznamenala žádný výpadek. U RDP byl poznat krátký zásek při psaní, u Minecraftu nebylo poznat vůbec nic.
+- **Live migrace (Move → Live Migration):** RAM běžící virtuálky se na pozadí přelila přes síť na druhý node. Uptime Kuma nezaznamenala žádný výpadek. U RDP byl poznat krátký zásek při psaní, u Minecraftu nebylo poznat vůbec nic.
 
-* **Neplánovaný failover:** Výpadek jsem nasimuloval odpojením sítě jednoho nodu a testoval jsem ho na virtuálce s RDP. Druhý node ho po asi minutě zjistil, VM se na něm ale spustila až po cca 4 minutách a RDP bylo dostupné až po skoro 6 minutách. U Minecraft serveru jsem failover nezkoušel, výsledek ale bude podobný, jen o něco delší, protože po startu Windows musí naběhnout ještě Java a samotný server.
+- **Neplánovaný failover:** Výpadek jsem nasimuloval odpojením sítě jednoho nodu a testoval jsem ho na virtuálce s RDP. Druhý node ho po asi minutě zjistil, VM se na něm ale spustila až po cca 4 minutách a RDP bylo dostupné až po skoro 6 minutách. U Minecraft serveru jsem failover nezkoušel, výsledek ale bude podobný, jen o něco delší, protože po startu Windows musí naběhnout ještě Java a samotný server.
 
-| Test | Výsledek |
-|---|---|
-| Live migrace (RDP) | krátký zásek při psaní |
-| Live migrace (Minecraft) | bez znatelného výpadku |
-| Failover: VM spuštěna na druhém nodu (RDP) | cca 4 min |
-| Failover: RDP znovu dostupné | cca 6 min |
+| Test                                       | Výsledek               |
+| ------------------------------------------ | ---------------------- |
+| Live migrace (RDP)                         | krátký zásek při psaní |
+| Live migrace (Minecraft)                   | bez znatelného výpadku |
+| Failover: VM spuštěna na druhém nodu (RDP) | cca 4 min              |
+| Failover: RDP znovu dostupné               | cca 6 min              |
 
 ## Problémy a řešení
 

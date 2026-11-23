@@ -1,6 +1,7 @@
 <script setup>
 import AboutSection from '~/components/home/AboutSection.vue';
 import HeroSection from '~/components/home/HeroSection.vue';
+import ProjectsSection from '~/components/home/ProjectsSection.vue';
 import BlogSection from '~/components/home/BlogSection.vue';
 
 const { t } = useI18n();
@@ -69,6 +70,7 @@ useSeoMeta({
 <template>
   <HeroSection />
   <AboutSection />
+  <ProjectsSection />
   <BlogSection />
   <ContactBox id="contact" />
 </template>

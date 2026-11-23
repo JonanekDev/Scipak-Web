@@ -70,6 +70,14 @@ onUnmounted(() => {
           </li>
           <li>
             <NuxtLink
+              :to="{ path: localePath('/'), hash: '#projects' }"
+              aria-current-value="false"
+              @click="closeMobileMenu"
+              >~/projects</NuxtLink
+            >
+          </li>
+          <li>
+            <NuxtLink
               :to="{ path: localePath('/'), hash: '#contact' }"
               aria-current-value="false"
               @click="closeMobileMenu"
